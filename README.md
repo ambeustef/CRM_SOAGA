@@ -24,6 +24,9 @@ Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketi
 
 - `landing.html` — page vitrine publique (façon zoho.com/soaga.net) : présentation du produit, captures d'écran réelles, bouton « Se connecter » vers l'application. C'est la page qu'on verrait avant de se connecter.
 - `index.html` — l'application CRM elle-même (HTML/CSS/JS, un seul fichier, sans dépendance de build). C'est la page « après connexion ».
+- `config.js` — adresse et clé publique du projet Supabase (à renseigner).
+- `supabase-adapter.js` — connecteur Supabase : connexion, base de données, temps réel.
+- `supabase-schema.sql` — tables et règles d'accès à exécuter une fois dans Supabase.
 - `dashboard.png`, `pipeline.png` — captures d'écran réelles de l'application, utilisées par `landing.html`.
 - `persona-*.jpg`, `photo-*.jpg`, `campagne-1.jpg` — photos issues du Brand Guideline SOAGA 2026, utilisées par `landing.html` (personas clients, visuels d'équipe et de campagne).
 
@@ -34,14 +37,31 @@ Les deux pages sont publiées comme Artefacts Claude, avec stockage partagé en 
 - Page vitrine : https://claude.ai/artifact/3n1sVxCeQsRGNmcovbduhn
 - Application CRM : https://claude.ai/artifact/WhV6Y9FvREwGAj2Nu6rtaA
 
-### Option 2 — Ouverture locale / hébergement statique
-`index.html` peut aussi être ouvert directement dans un navigateur ou hébergé sur n'importe quel serveur statique (GitHub Pages, Netlify, etc.). Dans ce cas, le stockage partagé spécifique aux Artefacts Claude (`window.claude`) n'est pas disponible : l'application affiche un bandeau d'avertissement et fonctionne en mode lecture seule / état vide, sans backend de secours branché. Pour un déploiement réel (hors Artefact Claude), il faudra remplacer la couche de stockage par une vraie base de données / API.
+### Option 2 — Mise en ligne avec Supabase (vraie base + vrais comptes)
+Hors Artefact Claude (Vercel, serveur…), l'application se branche sur **Supabase** (offre gratuite) grâce à `supabase-adapter.js` : vrais comptes e-mail / mot de passe, données partagées en temps réel entre collègues, journal d'audit conservé en base et **non modifiable** (règle appliquée côté serveur).
+
+1. Créez un compte gratuit sur https://supabase.com puis un projet (région la plus proche, ex. *West EU*).
+2. Dans **SQL Editor → New query**, collez tout le contenu de `supabase-schema.sql` et cliquez **Run**.
+3. Dans **Authentication → Sign In / Providers → Email**, pour le prototype vous pouvez désactiver *Confirm email* (sinon chaque nouveau compte doit cliquer le lien reçu par e-mail).
+4. Dans **Project Settings → API**, copiez l'**URL du projet** et la clé **publishable** (ou *anon*), et collez-les dans `config.js`.
+5. Envoyez sur GitHub : Vercel redéploie tout seul.
+
+Adresses sur Vercel :
+- `/landing` — la vitrine ; « Se connecter » y fait une vraie connexion puis ouvre l'application.
+- `/app` — l'application CRM (écran de connexion / création de compte si besoin).
+
+Règles d'accès (définies dans `supabase-schema.sql`) :
+- Il faut être connecté pour lire ou écrire quoi que ce soit.
+- Le **premier compte créé devient administrateur** (accès à la page « Équipe »). Pour nommer un autre administrateur : `update profiles set is_admin = true where email = 'prenom.nom@soaga.net';` dans le SQL Editor.
+- Chaque membre ne peut modifier que son propre rôle ; seul un administrateur gère l'équipe.
+- Le journal d'audit ne peut être ni modifié ni supprimé par personne depuis l'application.
+
+Si `config.js` est vide, l'application s'ouvre mais affiche « Base de données non configurée » et n'enregistre rien. Dans l'Artefact Claude, `config.js` est ignoré et le stockage intégré est utilisé.
 
 ## Prochaines étapes possibles
 
 - Couleurs exactes de la charte SOAGA (logo/charte officielle à confirmer).
 - Modules supplémentaires du cahier des besoins : marketing automation, réseaux sociaux, chatbot, WhatsApp Business, intégrations SI (Atlantis SGO, VALORIX, GESSICAV, Active Directory / Entra ID, Microsoft 365), sécurité et conformité avancées.
-- Hébergement sur un serveur dédié pour des tests en conditions réelles avec l'équipe.
 
 ---
 *Document de travail — prototype, non destiné à un usage en production tel quel.*

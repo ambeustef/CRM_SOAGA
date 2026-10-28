@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>SOAGA CRM</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -322,6 +323,7 @@ tbody tr:hover{background:var(--surface-2)}
       <div class="spacer"></div>
       <button class="btn btn-accent" id="btn-new-contact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span id="btn-new-label">Nouveau lead</span></button>
       <button id="userchip" title="Changer mon rôle"><img id="uavatar" alt=""><span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.25;min-width:0"><span class="uname" id="uname">…</span><span id="urolebadge" style="font-size:10px;color:var(--text-faint)"></span></span></button>
+      <button class="btn btn-sm btn-ghost" id="btn-logout" hidden title="Se déconnecter">Déconnexion</button>
     </header>
     <main id="view"></main>
   </div>
@@ -333,6 +335,9 @@ tbody tr:hover{background:var(--surface-2)}
 <div id="modal-scrim"><div id="modal"></div></div>
 <div class="toast-wrap" id="toastwrap"></div>
 
+<!-- Hors Artefact Claude : base Supabase + comptes (voir README) -->
+<script src="config.js" charset="utf-8"></script>
+<script src="supabase-adapter.js" charset="utf-8"></script>
 <script>
 (function(){
 "use strict";
@@ -597,6 +602,11 @@ window.addEventListener('hashchange',function(){
 
 /* ===================== DB wiring ===================== */
 function initCapabilities(){
+  if(window.SOAGA_AUTH){
+    var lo=document.getElementById('btn-logout');
+    lo.hidden=false;
+    lo.addEventListener('click',function(){ window.SOAGA_AUTH.signOut(); });
+  }
   if(!window.claude || !window.claude.use){ renderUnavailableBanner(); render(); return; }
   Promise.all([window.claude.use('db'), window.claude.use('user')]).then(function(res){
     S.db = res[0]; S.userCap = res[1];

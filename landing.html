@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>CRM SOAGA</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -714,10 +715,13 @@ main{overflow-x:clip}
       </div>
       <a id="login-submit" class="btn btn-accent btn-lg login-submit" href="https://claude.ai/artifact/WhV6Y9FvREwGAj2Nu6rtaA" target="_blank" rel="noopener">Se connecter →</a>
     </form>
-    <p class="login-note">Prototype de démonstration : aucune information saisie n'est enregistrée ni vérifiée. Tout e-mail et mot de passe renseignés ouvrent l'application dans un nouvel onglet.</p>
+    <p class="login-note" id="login-signup" hidden>Pas encore de compte ? <a href="app?signup=1" style="color:var(--accent);font-weight:700">Créer un compte</a></p>
+    <p class="login-note" id="login-note">Prototype de démonstration : aucune information saisie n'est enregistrée ni vérifiée. Tout e-mail et mot de passe renseignés ouvrent l'application dans un nouvel onglet.</p>
   </div>
 </div>
 
+<script src="config.js" charset="utf-8"></script>
+<script src="supabase-adapter.js" charset="utf-8" data-auth-only></script>
 <script>
 (function(){
   "use strict";
@@ -756,17 +760,37 @@ main{overflow-x:clip}
     toggleBtn.setAttribute('aria-label', showing ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
   });
 
+  // Avec Supabase configuré (config.js), la connexion est réelle et ouvre l'application ;
+  // sinon (Artefact Claude), le lien ouvre l'artefact de l'application.
+  var realAuth = !!window.SOAGA_AUTH;
+  if(realAuth){
+    submitLink.href='app'; submitLink.removeAttribute('target');
+    document.getElementById('login-signup').hidden=false;
+    document.getElementById('login-note').textContent='Connexion sécurisée à l\'espace CRM partagé de l\'équipe SOAGA.';
+  }
+  var EMPTY_MSG=errorEl.textContent;
   submitLink.addEventListener('click', function(e){
     var email=emailEl.value.trim(), pw=pwEl.value;
     if(!email || !pw){
       e.preventDefault();
+      errorEl.textContent=EMPTY_MSG;
       errorEl.hidden=false;
       (!email ? emailEl : pwEl).focus();
       return;
     }
     errorEl.hidden=true;
+    if(!realAuth) return;
+    e.preventDefault();
+    submitLink.style.opacity='.6'; submitLink.style.pointerEvents='none';
+    window.SOAGA_AUTH.signIn(email, pw).then(function(){
+      location.href='app';
+    }).catch(function(err){
+      submitLink.style.opacity=''; submitLink.style.pointerEvents='';
+      errorEl.textContent=err.message;
+      errorEl.hidden=false;
+    });
   });
 
-  document.getElementById('login-form').addEventListener('submit', function(e){ e.preventDefault(); });
+  document.getElementById('login-form').addEventListener('submit', function(e){ e.preventDefault(); submitLink.click(); });
 })();
 </script>
