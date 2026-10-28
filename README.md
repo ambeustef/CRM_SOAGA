@@ -11,7 +11,12 @@ Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketi
 - **Clients & partenaires** — fiche 360° : informations, historique des échanges, activités liées, tickets liés.
 - **Activités & tâches** — appels, rendez-vous, relances, avec repérage des échéances en retard.
 - **Tickets & réclamations** — catégorie, priorité, statut, et calcul automatique du respect du SLA (4h / 24h / 72h / 5j selon la priorité).
-- **Tableau de bord** — KPI (leads actifs, taux de conversion, valeur du pipeline, tickets ouverts), répartition du pipeline, activité récente, échéances de la semaine.
+- **Tableau de bord** — KPI (leads actifs, taux de conversion, valeur du pipeline, tickets ouverts, CSAT moyen), répartition du pipeline, activité récente, échéances de la semaine, motifs récurrents.
+- **Journal d'audit** — qui a créé, modifié (valeur avant → après) ou supprimé chaque fiche/tâche/ticket/campagne, avec auteur et date ; visible par fiche (onglet « Journal ») et dans le flux d'activité global du tableau de bord.
+- **Rôles & équipe** — chaque personne choisit son rôle (Commercial, Service client, Marketing, Direction, Administrateur) depuis son profil. Page « Équipe » réservée aux éditeurs de l'artefact pour gérer les rôles de l'équipe — c'est la seule restriction réellement appliquée côté stockage (via les règles d'accès de la base de l'artefact) ; le reste de la différenciation par rôle est à but d'affichage uniquement.
+- **Service client enrichi** — base de connaissances (FAQ), escalade d'un ticket (passe en urgence + crée une tâche de suivi automatique), note de satisfaction (CSAT) à la clôture.
+- **Campagnes marketing (simulées)** — création d'une campagne ciblée (étape/source), lancement générant des statistiques d'envoi/ouverture/clic/conversion simulées pour la démonstration (aucun message n'est réellement envoyé).
+- **Rapports** — filtres par période et par propriétaire, délai moyen de résolution des tickets, CSAT moyen, prévisions par propriétaire, et export CSV des fiches.
 
 ## Fichier
 
