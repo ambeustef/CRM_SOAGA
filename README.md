@@ -2,6 +2,8 @@
 
 Prototype de CRM (gestion de la relation client) aux couleurs de la charte SOAGA, construit à partir du *Cahier de besoins — Acquisition et déploiement d'une solution de Gestion de la Relation Client (CRM)* (SOAGA, août 2026).
 
+Identité visuelle (couleurs, logo, typographie) conforme à `BRAND.md`, extrait du *SOAGA Brand Guideline 2026 — charte digitale* officiel.
+
 ## Périmètre de cette v1 ("cœur commercial")
 
 Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketing automation, réseaux sociaux, chatbot, WhatsApp Business, service client avec SLA, vision 360°, reporting, intégrations SI, sécurité…). Cette première version se concentre sur le cœur commercial :

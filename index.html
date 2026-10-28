@@ -1,60 +1,63 @@
 <title>SOAGA CRM</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap">
 <style>
-/* Layout concept: fixed navy app-shell sidebar (Zoho-style module rail) + white content canvas;
-   bordeaux accent marks actions, urgency and the active module. */
+/* Layout concept: fixed navy app-shell sidebar (Zoho-style module rail) + cream content canvas;
+   SOAGA brand red (#990000) marks actions, urgency and the active module. Colors/fonts per BRAND.md. */
 :root{
-  --bg:#F3F4F7; --surface:#FFFFFF; --surface-2:#F8F9FB; --surface-3:#EEF0F4;
-  --border:#E3E5EB; --border-strong:#D3D6E0;
-  --text:#18233F; --text-muted:#5B6478; --text-faint:#8991A3;
-  --navy:#0F1E3D; --navy-2:#162A52; --navy-ink:#0A1530; --navy-soft:#E9ECF6; --on-navy:#F3F5FB; --on-navy-muted:#AEB8D4;
-  --accent:#96151B; --accent-ink:#7A1015; --accent-soft:#FBEAEA; --on-accent:#FFFFFF;
-  --success:#15803D; --success-soft:#E6F4EA;
-  --warning:#B45309; --warning-soft:#FBF0DD;
-  --critical:#C0262B; --critical-soft:#FBE8E8;
-  --focus:#2563EB;
-  --shadow:0 1px 2px rgba(15,30,61,.06),0 8px 24px -12px rgba(15,30,61,.18);
-  --shadow-lg:0 20px 50px -20px rgba(15,30,61,.35);
+  --bg:#FFF8ED; --surface:#FFFAFA; --surface-2:#F6EEE1; --surface-3:#EFE3D2;
+  --border:#E6D9C7; --border-strong:#D8C7AE;
+  --text:#111A31; --text-muted:#4A5366; --text-faint:#7A8296;
+  --navy:#111A31; --navy-2:#1C2A4A; --navy-ink:#0A1020; --navy-soft:#E4E8F0; --on-navy:#F3F1EA; --on-navy-muted:#AEB4C6;
+  --accent:#990000; --accent-ink:#7A0000; --accent-soft:#F7E3E0; --on-accent:#FFFFFF;
+  --terracotta:#C87B63; --gold:#FCC97D;
+  --success:#1B7A3D; --success-soft:#E6F4EA;
+  --warning:#B2650A; --warning-soft:#FEEACD;
+  --critical:#7A0000; --critical-soft:#F5D9D6;
+  --focus:#355097;
+  --shadow:0 1px 2px rgba(17,26,49,.06),0 8px 24px -12px rgba(17,26,49,.18);
+  --shadow-lg:0 20px 50px -20px rgba(17,26,49,.35);
   --radius:10px; --radius-sm:7px;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0A0F1E; --surface:#121A30; --surface-2:#0E1526; --surface-3:#1A2440;
-    --border:#242F4E; --border-strong:#2E3A5C;
-    --text:#E7EAF4; --text-muted:#9BA4C0; --text-faint:#6E7899;
-    --navy:#0C1326; --navy-2:#16213F; --navy-ink:#070B16; --navy-soft:#1C2847; --on-navy:#EEF1FA; --on-navy-muted:#8E9AC0;
-    --accent:#D2454B; --accent-ink:#E8696E; --accent-soft:#2E1518; --on-accent:#FFFFFF;
-    --success:#34D399; --success-soft:#0E2B1F;
-    --warning:#F2A93C; --warning-soft:#332208;
-    --critical:#F3696E; --critical-soft:#311315;
-    --focus:#5B8DEF;
+    --bg:#0B0F1C; --surface:#141B2E; --surface-2:#101624; --surface-3:#1E2740;
+    --border:#2A3350; --border-strong:#394468;
+    --text:#F3F1EA; --text-muted:#A9B0C4; --text-faint:#767F99;
+    --navy:#0E1526; --navy-2:#1A2543; --navy-ink:#05080F; --navy-soft:#202C4C; --on-navy:#F3F1EA; --on-navy-muted:#8D96B0;
+    --accent:#D9453D; --accent-ink:#C23730; --accent-soft:#3A1515; --on-accent:#FFFFFF;
+    --terracotta:#D79880; --gold:#F2A93C;
+    --success:#34C77A; --success-soft:#0E2B1F;
+    --warning:#F2A93C; --warning-soft:#3A2A0C;
+    --critical:#E2605A; --critical-soft:#3A1416;
+    --focus:#7B9AE0;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
     --shadow-lg:0 20px 50px -20px rgba(0,0,0,.65);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0A0F1E; --surface:#121A30; --surface-2:#0E1526; --surface-3:#1A2440;
-  --border:#242F4E; --border-strong:#2E3A5C;
-  --text:#E7EAF4; --text-muted:#9BA4C0; --text-faint:#6E7899;
-  --navy:#0C1326; --navy-2:#16213F; --navy-ink:#070B16; --navy-soft:#1C2847; --on-navy:#EEF1FA; --on-navy-muted:#8E9AC0;
-  --accent:#D2454B; --accent-ink:#E8696E; --accent-soft:#2E1518; --on-accent:#FFFFFF;
-  --success:#34D399; --success-soft:#0E2B1F;
-  --warning:#F2A93C; --warning-soft:#332208;
-  --critical:#F3696E; --critical-soft:#311315;
-  --focus:#5B8DEF;
+  --bg:#0B0F1C; --surface:#141B2E; --surface-2:#101624; --surface-3:#1E2740;
+  --border:#2A3350; --border-strong:#394468;
+  --text:#F3F1EA; --text-muted:#A9B0C4; --text-faint:#767F99;
+  --navy:#0E1526; --navy-2:#1A2543; --navy-ink:#05080F; --navy-soft:#202C4C; --on-navy:#F3F1EA; --on-navy-muted:#8D96B0;
+  --accent:#D9453D; --accent-ink:#C23730; --accent-soft:#3A1515; --on-accent:#FFFFFF;
+  --terracotta:#D79880; --gold:#F2A93C;
+  --success:#34C77A; --success-soft:#0E2B1F;
+  --warning:#F2A93C; --warning-soft:#3A2A0C;
+  --critical:#E2605A; --critical-soft:#3A1416;
+  --focus:#7B9AE0;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
   --shadow-lg:0 20px 50px -20px rgba(0,0,0,.65);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 "IBM Plex Sans",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
-.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:600}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 "Roboto",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+.mono{font-family:"Roboto Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:700;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
 button{font:inherit;cursor:pointer}
 input,select,textarea{font:inherit;color:inherit}
 a{color:inherit}
@@ -75,16 +78,16 @@ a{color:inherit}
 }
 #sidebar .brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;flex:none}
 #sidebar .brand svg{flex:none}
-#sidebar .brand .name{font-weight:700;font-size:15.5px;letter-spacing:.02em}
+#sidebar .brand .name{font-weight:700;font-size:15.5px;letter-spacing:.02em;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
 #sidebar .brand .sub{font-size:10.5px;color:var(--on-navy-muted);letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
 #sidebar nav{flex:1;overflow-y:auto;padding:6px 10px 10px}
 #sidebar .navgroup-label{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-muted);padding:14px 10px 6px}
-.navitem{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:var(--radius-sm);color:var(--on-navy-muted);text-decoration:none;font-weight:500;font-size:13.5px;margin-bottom:2px;border:1px solid transparent;position:relative}
+.navitem{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:var(--radius-sm);color:var(--on-navy-muted);text-decoration:none;font-weight:600;font-size:13.5px;margin-bottom:2px;border:1px solid transparent;position:relative;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
 .navitem svg{flex:none;opacity:.9}
 .navitem:hover{background:rgba(255,255,255,.06);color:var(--on-navy)}
 .navitem.active{background:var(--accent);color:var(--on-accent);box-shadow:var(--shadow)}
 .navitem.active svg{opacity:1}
-.navitem .count{margin-left:auto;font-size:11px;background:rgba(255,255,255,.14);padding:1px 7px;border-radius:99px;font-family:"IBM Plex Mono",monospace}
+.navitem .count{margin-left:auto;font-size:11px;background:rgba(255,255,255,.14);padding:1px 7px;border-radius:99px;font-family:"Roboto Mono",monospace}
 .navitem.active .count{background:rgba(255,255,255,.28)}
 #sidebar .foot{padding:12px 16px;border-top:1px solid rgba(255,255,255,.08);flex:none}
 #sidebar .foot .hint{font-size:11px;color:var(--on-navy-muted);line-height:1.5}
@@ -107,7 +110,7 @@ a{color:inherit}
 #topbar .search{flex:1;max-width:360px;display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:99px;padding:7px 13px;color:var(--text-muted);margin-left:8px}
 #topbar .search input{flex:1;border:0;background:none;outline:0;color:var(--text);min-width:0}
 #topbar .search svg{flex:none;opacity:.6}
-.btn{display:inline-flex;align-items:center;gap:7px;border-radius:var(--radius-sm);padding:8px 14px;font-weight:600;font-size:13px;border:1px solid transparent;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:var(--radius-sm);padding:8px 14px;font-weight:700;font-size:13px;border:1px solid transparent;white-space:nowrap;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
 .btn-accent{background:var(--accent);color:var(--on-accent)}
 .btn-accent:hover{background:var(--accent-ink)}
 .btn-ghost{background:var(--surface);border-color:var(--border-strong);color:var(--text)}
@@ -135,7 +138,7 @@ a{color:inherit}
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:18px}
 .kpi{padding:16px 16px 14px;display:flex;flex-direction:column;gap:7px}
 .kpi .lbl{font-size:12px;color:var(--text-muted);font-weight:600;display:flex;align-items:center;gap:6px}
-.kpi .val{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:600;letter-spacing:-.01em}
+.kpi .val{font-family:"Roboto Mono",monospace;font-size:26px;font-weight:600;letter-spacing:-.01em}
 .kpi .sub{font-size:11.5px;color:var(--text-faint)}
 .kpi .sub.up{color:var(--success)}
 .kpi .sub.warn{color:var(--critical)}
@@ -151,7 +154,7 @@ a{color:inherit}
 .funnel-row .track{height:16px;background:var(--surface-3);border-radius:5px;overflow:hidden}
 .funnel-row .fill{height:100%;border-radius:5px;background:var(--navy)}
 .funnel-row .fill.accent{background:var(--accent)}
-.funnel-row .n{font-family:"IBM Plex Mono",monospace;font-size:12px;text-align:right;color:var(--text-muted)}
+.funnel-row .n{font-family:"Roboto Mono",monospace;font-size:12px;text-align:right;color:var(--text-muted)}
 .funnel-row .lbl{font-size:12.5px;color:var(--text)}
 
 .feed-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
@@ -185,7 +188,7 @@ tbody tr:hover{background:var(--surface-2)}
 .badge-muted{background:var(--surface-3);color:var(--text-muted)}
 .dot{width:7px;height:7px;border-radius:99px;flex:none;background:currentColor}
 
-.score-pill{display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px}
+.score-pill{display:inline-flex;align-items:center;gap:6px;font-family:"Roboto Mono",monospace;font-weight:600;font-size:12px}
 .score-bar{width:44px;height:5px;border-radius:99px;background:var(--surface-3);overflow:hidden}
 .score-bar i{display:block;height:100%}
 
@@ -202,7 +205,7 @@ tbody tr:hover{background:var(--surface-2)}
 .kcol{flex:none;width:252px;display:flex;flex-direction:column;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);max-height:calc(100vh - 230px)}
 .kcol-head{padding:11px 12px 9px;flex:none;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .kcol-head .t{font-size:12.5px;font-weight:700}
-.kcol-head .n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--text-faint);background:var(--surface);border:1px solid var(--border);padding:1px 7px;border-radius:99px}
+.kcol-head .n{font-family:"Roboto Mono",monospace;font-size:11px;color:var(--text-faint);background:var(--surface);border:1px solid var(--border);padding:1px 7px;border-radius:99px}
 .kcol-body{flex:1;overflow-y:auto;padding:9px;display:flex;flex-direction:column;gap:8px;min-height:60px}
 .kcol-body.dragover{background:var(--navy-soft)}
 .kcard{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 11px;cursor:grab;box-shadow:var(--shadow)}
@@ -211,7 +214,7 @@ tbody tr:hover{background:var(--surface-2)}
 .kcard .nm{font-weight:600;font-size:13px}
 .kcard .co{font-size:11.5px;color:var(--text-faint);margin-top:1px}
 .kcard .meta{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
-.kcard .amt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--text-muted);font-weight:600}
+.kcard .amt{font-family:"Roboto Mono",monospace;font-size:11.5px;color:var(--text-muted);font-weight:600}
 
 /* Drawer */
 #drawer-scrim{position:fixed;inset:0;background:rgba(10,15,30,.45);z-index:50;opacity:0;pointer-events:none;transition:opacity .18s}
@@ -298,7 +301,7 @@ tbody tr:hover{background:var(--surface-2)}
 <div id="app">
   <aside id="sidebar">
     <div class="brand">
-      <svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="#96151B"/><g fill="#fff"><rect x="18" y="16" width="7" height="4" rx="2"/><rect x="26" y="14" width="7" height="4" rx="2"/><rect x="34" y="16" width="6" height="4" rx="2"/><rect x="16" y="22" width="6" height="4" rx="2"/><rect x="23" y="21" width="8" height="4" rx="2"/><rect x="32" y="22" width="9" height="4" rx="2"/><rect x="17" y="28" width="7" height="4" rx="2"/><rect x="25" y="28" width="12" height="4" rx="2"/><rect x="19" y="34" width="6" height="4" rx="2"/><rect x="26" y="34" width="10" height="4" rx="2"/><rect x="21" y="40" width="6" height="4" rx="2"/><rect x="28" y="40" width="7" height="4" rx="2"/><rect x="23" y="46" width="6" height="4" rx="2"/><circle cx="40" cy="47" r="2"/><circle cx="44" cy="51" r="1.6"/></g></svg>
+      <svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="#990000"/><g fill="#fff"><rect x="18" y="16" width="7" height="4" rx="2"/><rect x="26" y="14" width="7" height="4" rx="2"/><rect x="34" y="16" width="6" height="4" rx="2"/><rect x="16" y="22" width="6" height="4" rx="2"/><rect x="23" y="21" width="8" height="4" rx="2"/><rect x="32" y="22" width="9" height="4" rx="2"/><rect x="17" y="28" width="7" height="4" rx="2"/><rect x="25" y="28" width="12" height="4" rx="2"/><rect x="19" y="34" width="6" height="4" rx="2"/><rect x="26" y="34" width="10" height="4" rx="2"/><rect x="21" y="40" width="6" height="4" rx="2"/><rect x="28" y="40" width="7" height="4" rx="2"/><rect x="23" y="46" width="6" height="4" rx="2"/><circle cx="40" cy="47" r="2"/><circle cx="44" cy="51" r="1.6"/></g></svg>
       <div><div class="name">SOAGA</div><div class="sub">CRM &middot; Prototype</div></div>
     </div>
     <nav id="navlist"></nav>
