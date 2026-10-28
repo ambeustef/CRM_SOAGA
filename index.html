@@ -145,6 +145,79 @@ a{color:inherit}
 .kpi .sub.warn{color:var(--critical)}
 
 .dash-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+
+/* ---- tableau de bord : bandeau d'accueil, KPI visuels, animations ---- */
+.dash-hero{position:relative;overflow:hidden;isolation:isolate;border-radius:16px;padding:24px 26px;margin-bottom:16px;color:var(--on-navy);background:linear-gradient(120deg,var(--navy) 0%,var(--navy-2) 70%,color-mix(in srgb,var(--accent) 45%,var(--navy-2)) 130%);box-shadow:var(--shadow-lg)}
+.dash-hero .pills{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.dash-hero .pill{position:absolute;height:34px;border-radius:99px;background:rgba(255,255,255,.07);animation:heroPillIn 1.4s cubic-bezier(.2,.7,.2,1) both,heroSway 9s ease-in-out 1.4s infinite}
+.dash-hero .pill.a{background:color-mix(in srgb,var(--accent) 70%,transparent)}
+.dash-hero .pill.g{background:color-mix(in srgb,var(--gold) 55%,transparent)}
+@media (max-width:640px){.dash-hero{padding:20px 18px}.dash-hero .pill{opacity:.45}.dash-hero .pill.a,.dash-hero .pill.g{display:none}}
+.dash-hero .date{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-navy-muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dash-hero h2{font-size:clamp(20px,2.4vw,26px);margin:8px 0 6px;color:var(--on-navy)}
+.dash-hero p{color:var(--on-navy-muted);font-size:13.5px;max-width:560px;line-height:1.55}
+.dash-hero p b{color:var(--on-navy)}
+.dash-hero .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.dash-hero .actions .btn{border-radius:99px;text-decoration:none}
+.dash-hero .btn-glass{background:rgba(255,255,255,.1);color:var(--on-navy);border:1px solid rgba(255,255,255,.18)}
+.dash-hero .btn-glass:hover{background:rgba(255,255,255,.18)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--success)}
+.live i{width:7px;height:7px;border-radius:99px;background:currentColor;animation:livePulse 1.8s ease-out infinite}
+.dash-hero .live{color:#6EE7A8}
+.kpi-grid.v2{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.kpi-grid.v2{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.kpi-grid.v2{grid-template-columns:1fr}}
+.kpi2{position:relative;overflow:hidden;padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.kpi2::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--tone)}
+.kpi2:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.kpi2 .top{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;color:var(--text-muted)}
+.kpi2 .ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none;color:var(--tone);background:color-mix(in srgb,var(--tone) 13%,transparent)}
+.kpi2 .row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;min-height:52px}
+.kpi2 .val{font-family:"Roboto Mono",monospace;font-size:26px;font-weight:600;letter-spacing:-.01em;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi2 .val.sm{font-size:19px}
+.kpi2 .sub{font-size:11.5px;color:var(--text-faint)}
+.kpi2 .sub.up{color:var(--success)} .kpi2 .sub.warn{color:var(--critical)}
+.spark{width:110px;height:40px;flex:none;overflow:visible}
+.ring{flex:none}
+.ring .bg{stroke:var(--surface-3)}
+.ring text{font:600 12px "Roboto Mono",monospace;fill:var(--text)}
+.segbar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--surface-3);gap:2px}
+.segbar span{display:block;height:100%}
+.seglegend{display:flex;gap:10px;flex-wrap:wrap;font-size:10.5px;color:var(--text-faint)}
+.seglegend i{display:inline-block;width:7px;height:7px;border-radius:99px;margin-right:4px;vertical-align:1px}
+.funnel-row{border-radius:7px;transition:background .2s}
+.funnel-row:hover{background:var(--surface-2)}
+.funnel-row .fill{background:linear-gradient(90deg,var(--navy),var(--navy-2))}
+.funnel-row .fill.accent{background:linear-gradient(90deg,var(--accent),var(--terracotta))}
+:root[data-theme="dark"] .funnel-row .fill:not(.accent):not(.terra){background:linear-gradient(90deg,#355097,#7B9AE0)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .funnel-row .fill:not(.accent):not(.terra){background:linear-gradient(90deg,#355097,#7B9AE0)}}
+.funnel-row .fill.terra{background:linear-gradient(90deg,var(--terracotta),var(--gold))}
+.csat-wrap{display:flex;align-items:center;gap:18px}
+.csat-wrap .stars{display:flex;gap:3px;margin-top:6px}
+.csat-wrap .stars svg{color:var(--surface-3)}
+.csat-wrap .stars svg.on{color:var(--gold)}
+.feed-item,.mini-row{transition:transform .2s}
+.feed-item:hover{transform:translateX(3px)}
+
+@keyframes heroPillIn{from{transform:translateX(120%)}to{transform:none}}
+@keyframes heroSway{0%,100%{translate:0 0}50%{translate:-22px 0}}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,currentColor 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
+@keyframes dashRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes barGrow{from{width:0}}
+@keyframes ringFill{from{stroke-dashoffset:100}}
+@keyframes sparkDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fadeIn{from{opacity:0}}
+/* --el = temps déjà écoulé (négatif) : un nouveau rendu pendant l'animation la poursuit au lieu de la relancer */
+.dash-anim .rise{animation:dashRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--el,0ms) + var(--i,0) * 70ms)}
+.dash-anim .fill{animation:barGrow 1s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--el,0ms) + 350ms + var(--i,0) * 60ms)}
+.dash-anim .segbar span{animation:barGrow .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--el,0ms) + 450ms)}
+.dash-anim .ring .arc{animation:ringFill 1.2s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--el,0ms) + 400ms)}
+.dash-anim .spark .line{animation:sparkDraw 1.3s ease-out both;animation-delay:calc(var(--el,0ms) + 400ms)}
+.dash-anim .spark .area{animation:fadeIn .8s ease-out both;animation-delay:calc(var(--el,0ms) + 1100ms)}
+@media (prefers-reduced-motion:reduce){
+  .dash-anim .rise,.dash-anim .fill,.dash-anim .segbar span,.dash-anim .ring .arc,.dash-anim .spark .line,.dash-anim .spark .area,.dash-hero .pill,.live i{animation:none!important}
+  .kpi2,.feed-item,.mini-row{transition:none}
+}
 @media (max-width:980px){.dash-grid{grid-template-columns:1fr}}
 .panel{padding:16px}
 .panel h3{font-size:14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
@@ -413,7 +486,9 @@ var S = {
   search:'', leadFilter:'all', clientFilter:'all', taskFilter:'open', ticketFilter:'open',
   reportRange:'30', reportOwner:'all',
   drawer:{open:false,contactId:null,tab:'infos'},
+  dashAnimPending:true, dashAnimStart:0,
 };
+var DASH_ANIM_MS=1800;
 
 function uid(){return 'id'+Math.random().toString(36).slice(2,10)+Date.now().toString(36);}
 function nowISO(){return new Date().toISOString();}
@@ -589,6 +664,7 @@ function uniqueOwners(){
 
 /* ===================== routing ===================== */
 function setRoute(r){
+  if(r==='dashboard' && S.route!=='dashboard') S.dashAnimPending=true;
   S.route=r;
   location.hash='#'+r;
   closeDrawer();
@@ -597,6 +673,7 @@ function setRoute(r){
 window.addEventListener('hashchange',function(){
   var r=(location.hash||'#dashboard').slice(1).split('?')[0];
   if(!NAV.some(function(n){return n.id===r;})) r='dashboard';
+  if(r==='dashboard' && S.route!=='dashboard') S.dashAnimPending=true;
   S.route=r; render();
 });
 
@@ -743,80 +820,199 @@ function renderTopbar(){
 }
 
 /* ===================== view: dashboard ===================== */
+function dataReady(){
+  if(!window.claude) return true;
+  if(!S.db) return false;
+  for(var k in S.loaded){ if(!S.loaded[k]) return false; }
+  return true;
+}
+function dashAnimating(){
+  if(S.dashAnimPending && dataReady()){ S.dashAnimPending=false; S.dashAnimStart=Date.now(); }
+  return S.dashAnimStart && (Date.now()-S.dashAnimStart)<DASH_ANIM_MS;
+}
+var countLoop=false;
+function runCountUps(){
+  if(countLoop) return;
+  var wrap=document.querySelector('.dash-anim');
+  if(!wrap) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  countLoop=true;
+  (function tick(){
+    var els=document.querySelectorAll('.dash-anim [data-count]');
+    var t=Math.min(1,Math.max(0,(Date.now()-S.dashAnimStart-200)/1100));
+    var e=1-Math.pow(1-t,3);
+    for(var i=0;i<els.length;i++){
+      var el=els[i], target=Number(el.getAttribute('data-count'))||0, fmt=el.getAttribute('data-fmt');
+      var v=target*e;
+      el.textContent = fmt==='amount' ? fmtAmount(Math.round(v)) : fmt==='pct' ? Math.round(v)+'%' : fmt==='dec' ? (v).toFixed(1) : String(Math.round(v));
+    }
+    if(t<1 && els.length) requestAnimationFrame(tick); else countLoop=false;
+  })();
+}
+function greetingName(){
+  var n=(S.me&&S.me.name)||'';
+  return n ? n.split(/\s+/)[0] : '';
+}
+function leadsPerDay(days){
+  var out=[], today=new Date(); today.setHours(0,0,0,0);
+  for(var i=days-1;i>=0;i--){
+    var d0=new Date(today.getTime()-i*86400000), d1=new Date(d0.getTime()+86400000);
+    out.push(S.contacts.filter(function(c){ if(!c.createdAt) return false; var d=new Date(c.createdAt); return d>=d0 && d<d1; }).length);
+  }
+  return out;
+}
+function sparkline(vals){
+  var w=110,h=40,max=Math.max.apply(null,vals.concat([1])),step=w/(vals.length-1);
+  var pts=vals.map(function(v,i){ return [Math.round(i*step*10)/10, Math.round((h-4-(v/max)*(h-10))*10)/10]; });
+  var line=pts.map(function(p,i){return (i?'L':'M')+p[0]+' '+p[1];}).join(' ');
+  var last=pts[pts.length-1];
+  return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" aria-hidden="true"><defs><linearGradient id="sparkg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>'+
+    '<path class="area" d="'+line+' L'+w+' '+h+' L0 '+h+' Z" fill="url(#sparkg)"/>'+
+    '<path class="line" d="'+line+'" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>'+
+    '<circle cx="'+last[0]+'" cy="'+last[1]+'" r="3" fill="var(--accent)"/></svg>';
+}
+function ringGauge(pct,color,size,label){
+  pct=Math.max(0,Math.min(100,pct||0)); size=size||52;
+  return '<svg class="ring" width="'+size+'" height="'+size+'" viewBox="0 0 60 60" aria-hidden="true">'+
+    '<circle class="bg" cx="30" cy="30" r="25" fill="none" stroke-width="7"/>'+
+    '<circle class="arc" cx="30" cy="30" r="25" fill="none" stroke="'+color+'" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="'+(100-pct)+'" transform="rotate(-90 30 30)"/>'+
+    (label?'<text x="30" y="34" text-anchor="middle">'+label+'</text>':'')+'</svg>';
+}
+function countSpan(val,fmt,display){
+  return '<span data-count="'+val+'" data-fmt="'+(fmt||'int')+'">'+display+'</span>';
+}
+function starSvg(on){ return '<svg class="'+(on?'on':'')+'" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'; }
+
 function viewDashboard(){
+  var anim=dashAnimating();
+  var el=anim? -(Date.now()-S.dashAnimStart) : 0;
   var feed=recentFeed(7);
   var upcoming=tasksThisWeek().slice(0,6);
   var maxStage=Math.max.apply(null,STAGES.filter(function(s){return s.id!=='perdu';}).map(function(s){return stageCount(s.id);}).concat([1]));
+  var leadsActive=activeContacts().filter(function(c){return LEAD_STAGES.indexOf(c.stage)>=0;}).length;
+  var openT=openTicketsCount(), overdue=overdueTicketsCount();
+  var conv=conversionRate(), pv=pipelineValue();
+  var i=0; function nx(){ return ' style="--i:'+(i++)+'"'; }
 
-  var html='';
-  html+='<div class="kpi-grid">';
-  html+=kpiTile('Leads actifs', activeContacts().filter(function(c){return LEAD_STAGES.indexOf(c.stage)>=0;}).length, '+'+newLeadsThisMonth()+' ce mois-ci','up');
-  html+=kpiTile('Taux de conversion', conversionRate()+'%', 'leads → clients');
-  html+=kpiTile('Valeur du pipeline', fmtAmount(pipelineValue()), 'opportunités en cours');
-  html+=kpiTile('Tickets ouverts', openTicketsCount(), overdueTicketsCount()>0 ? overdueTicketsCount()+' en dépassement SLA' : 'SLA respectés', overdueTicketsCount()>0?'warn':'');
+  var html='<div class="dash'+(anim?' dash-anim':'')+'" style="--el:'+el+'ms">';
+
+  // bandeau d'accueil
+  var today=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var nm=greetingName();
+  html+='<section class="dash-hero rise"'+nx()+'>';
+  html+='<div class="pills" aria-hidden="true">'+
+    '<span class="pill" style="width:260px;top:14px;right:-60px;animation-delay:.05s,1.45s"></span>'+
+    '<span class="pill a" style="width:110px;top:62px;right:150px;animation-delay:.2s,1.6s"></span>'+
+    '<span class="pill" style="width:220px;top:62px;right:-90px;animation-delay:.15s,1.55s"></span>'+
+    '<span class="pill g" style="width:70px;top:110px;right:60px;animation-delay:.3s,1.7s"></span>'+
+    '<span class="pill" style="width:300px;top:110px;right:-210px;animation-delay:.25s,1.65s"></span>'+
+    '<span class="pill" style="width:180px;top:158px;right:20px;animation-delay:.35s,1.75s"></span>'+
+    '</div>';
+  html+='<div class="date">'+esc(today)+' <span class="live"><i></i> Données en direct</span></div>';
+  html+='<h2>Bonjour'+(nm?' '+esc(nm):'')+'</h2>';
+  html+='<p>Aujourd\'hui : <b>'+leadsActive+' lead'+(leadsActive>1?'s':'')+'</b> à suivre, <b>'+tasksThisWeek().length+' échéance'+(tasksThisWeek().length>1?'s':'')+'</b> cette semaine et <b>'+openT+' ticket'+(openT>1?'s':'')+' ouvert'+(openT>1?'s':'')+'</b>'+(overdue?' dont <b style="color:#FF9C95">'+overdue+' hors délai</b>':'')+'.</p>';
+  html+='<div class="actions">'+
+    '<button type="button" class="btn btn-accent" data-dash-action="lead">'+icon('leads',14)+' Nouveau lead</button>'+
+    '<a href="#pipeline" class="btn btn-glass" data-nav="pipeline">'+icon('pipeline',14)+' Voir le pipeline</a>'+
+    '<button type="button" class="btn btn-glass" data-dash-action="ticket">'+icon('tickets',14)+' Nouveau ticket</button>'+
+    '</div></section>';
+
+  // KPI
+  var stagesAmt={prospect:0,opportunite:0};
+  activeContacts().forEach(function(c){ if(stagesAmt[c.stage]!=null) stagesAmt[c.stage]+=Number(c.amount)||0; });
+  var pTot=Math.max(1,stagesAmt.prospect+stagesAmt.opportunite);
+  var ticketsOpenList=S.tickets.filter(function(t){return t.status==='ouvert'||t.status==='en_cours';});
+  var sOk=0,sNear=0,sLate=0;
+  ticketsOpenList.forEach(function(t){ var st=slaState(t); if(st.late) sLate++; else if(st.cls==='badge-warning') sNear++; else sOk++; });
+  var tTot=Math.max(1,ticketsOpenList.length);
+
+  html+='<div class="kpi-grid v2">';
+  html+='<div class="card kpi2 rise" style="--tone:var(--accent);--i:'+(i++)+'"><div class="top"><span class="ico">'+icon('leads',15)+'</span>Leads actifs</div>'+
+    '<div class="row"><div><div class="val">'+countSpan(leadsActive,'int',leadsActive)+'</div><div class="sub up">+'+newLeadsThisMonth()+' ce mois-ci</div></div>'+sparkline(leadsPerDay(14))+'</div></div>';
+  html+='<div class="card kpi2 rise" style="--tone:var(--focus);--i:'+(i++)+'"><div class="top"><span class="ico">'+icon('reports',15)+'</span>Taux de conversion</div>'+
+    '<div class="row"><div><div class="val">'+countSpan(conv,'pct',conv+'%')+'</div><div class="sub">leads → clients</div></div>'+ringGauge(conv,'var(--accent)',54)+'</div></div>';
+  html+='<div class="card kpi2 rise" style="--tone:var(--gold);--i:'+(i++)+'"><div class="top"><span class="ico" style="color:var(--warning)">'+icon('pipeline',15)+'</span>Valeur du pipeline</div>'+
+    '<div><div class="val sm">'+countSpan(pv,'amount',fmtAmount(pv))+'</div><div class="sub">opportunités en cours</div></div>'+
+    '<div class="segbar"><span style="width:'+Math.round(stagesAmt.prospect/pTot*100)+'%;background:var(--terracotta)"></span><span style="width:'+Math.round(stagesAmt.opportunite/pTot*100)+'%;background:var(--accent)"></span></div>'+
+    '<div class="seglegend"><span><i style="background:var(--terracotta)"></i>Prospects</span><span><i style="background:var(--accent)"></i>Opportunités</span></div></div>';
+  html+='<div class="card kpi2 rise" style="--tone:var(--terracotta);--i:'+(i++)+'"><div class="top"><span class="ico">'+icon('tickets',15)+'</span>Tickets ouverts</div>'+
+    '<div><div class="val">'+countSpan(openT,'int',openT)+'</div><div class="sub'+(overdue?' warn':'')+'">'+(overdue? overdue+' en dépassement SLA' : 'SLA respectés')+'</div></div>'+
+    '<div class="segbar">'+(ticketsOpenList.length? '<span style="width:'+(sOk/tTot*100)+'%;background:var(--success)"></span><span style="width:'+(sNear/tTot*100)+'%;background:var(--warning)"></span><span style="width:'+(sLate/tTot*100)+'%;background:var(--critical)"></span>' : '')+'</div>'+
+    '<div class="seglegend"><span><i style="background:var(--success)"></i>Dans les temps</span><span><i style="background:var(--warning)"></i>Proches</span><span><i style="background:var(--critical)"></i>Dépassés</span></div></div>';
   html+='</div>';
 
+  // pipeline + activité
   html+='<div class="dash-grid">';
-  html+='<div class="card panel">';
+  html+='<div class="card panel rise"'+nx()+'>';
   html+='<h3>Répartition du pipeline <span class="mini">'+activeContacts().length+' fiches actives</span></h3>';
-  STAGES.forEach(function(s){
+  STAGES.forEach(function(s,k){
     var n=stageCount(s.id);
     var pct=Math.round(n/maxStage*100);
-    html+='<div class="funnel-row"><div class="lbl">'+s.label+'</div><div class="track"><div class="fill'+(s.id==='opportunite'||s.id==='client'?' accent':'')+'" style="width:'+pct+'%"></div></div><div class="n">'+n+'</div></div>';
+    var cls=(s.id==='opportunite'||s.id==='client')?' accent':(s.id==='perdu'||s.id==='a_reactiver')?' terra':'';
+    html+='<div class="funnel-row"><div class="lbl">'+s.label+'</div><div class="track"><div class="fill'+cls+'" style="width:'+pct+'%;--i:'+k+'"></div></div><div class="n">'+n+'</div></div>';
   });
   html+='</div>';
 
-  html+='<div class="card panel">';
-  html+='<h3>Activité récente</h3>';
+  html+='<div class="card panel rise"'+nx()+'>';
+  html+='<h3>Activité récente <span class="live"><i></i> En direct</span></h3>';
   if(!feed.length){ html+=emptyState('activities','Aucune activité pour le moment','Les actions de l\'équipe apparaîtront ici en direct.'); }
   else {
     html+='<div>';
-    feed.forEach(function(item){ html+=feedItem(item); });
+    feed.forEach(function(item,k){ html+=feedItem(item).replace('<div class="feed-item">','<div class="feed-item rise" style="--i:'+(k+6)+'">'); });
     html+='</div>';
   }
   html+='</div>';
   html+='</div>';
 
+  // échéances + tickets
   html+='<div class="dash-grid" style="margin-top:14px">';
-  html+='<div class="card panel">';
+  html+='<div class="card panel rise"'+nx()+'>';
   html+='<h3>Échéances de la semaine <span class="mini">'+upcoming.length+' à venir</span></h3>';
   if(!upcoming.length){ html+=emptyState('activities','Rien de prévu cette semaine','Planifiez une relance ou un rendez-vous depuis une fiche.'); }
-  else { html+='<div class="mini-list">'+upcoming.map(taskRow).join('')+'</div>'; }
+  else { html+='<div class="mini-list">'+upcoming.map(function(t,k){ return taskRow(t).replace('<div class="mini-row"','<div class="mini-row rise" style="--i:'+(k+8)+'"'); }).join('')+'</div>'; }
   html+='</div>';
 
-  html+='<div class="card panel">';
+  html+='<div class="card panel rise"'+nx()+'>';
   html+='<h3>Tickets à surveiller</h3>';
   var urgent=S.tickets.filter(function(t){return t.status!=='resolu'&&t.status!=='ferme';}).sort(function(a,b){return slaDeadline(a)-slaDeadline(b);}).slice(0,6);
   if(!urgent.length){ html+=emptyState('tickets','Aucun ticket ouvert','La file de réclamations est vide.'); }
   else {
     html+='<div class="mini-list">';
-    urgent.forEach(function(t){
+    urgent.forEach(function(t,k){
       var sla=slaState(t);
       var c=byId(S.contacts,t.contactId);
-      html+='<div class="mini-row" style="cursor:pointer" data-open-contact="'+t.contactId+'"><span class="badge '+sla.cls+'">'+sla.label+'</span><span class="t">'+esc(t.subject)+(c?' · <span style="color:var(--text-faint)">'+esc(c.name)+'</span>':'')+'</span></div>';
+      html+='<div class="mini-row rise" style="cursor:pointer;--i:'+(k+8)+'" data-open-contact="'+t.contactId+'"><span class="badge '+sla.cls+'">'+sla.label+'</span><span class="t">'+esc(t.subject)+(c?' · <span style="color:var(--text-faint)">'+esc(c.name)+'</span>':'')+'</span></div>';
     });
     html+='</div>';
   }
   html+='</div>';
   html+='</div>';
 
+  // satisfaction + motifs
   html+='<div class="dash-grid" style="margin-top:14px">';
-  html+='<div class="card panel"><h3>Satisfaction client (CSAT)</h3>';
+  html+='<div class="card panel rise"'+nx()+'><h3>Satisfaction client (CSAT)</h3>';
   var csat=avgCsat();
   if(csat===null){ html+=emptyState('tickets','Pas encore de retour','La note de satisfaction apparaît après la clôture d\'un ticket.'); }
-  else { html+='<div class="val mono" style="font-size:28px">'+csat+' / 5</div><div style="color:var(--text-faint);font-size:12px;margin-top:4px">Moyenne sur '+S.tickets.filter(function(t){return t.csat;}).length+' retour(s)</div>'; }
+  else {
+    var nb=S.tickets.filter(function(t){return t.csat;}).length, cs=Number(csat), stars='';
+    for(var k=1;k<=5;k++) stars+=starSvg(cs>=k-0.25);
+    html+='<div class="csat-wrap">'+ringGauge(cs/5*100,'var(--gold)',84,'')+
+      '<div><div class="val mono" style="font-size:28px;font-weight:600">'+countSpan(cs,'dec',csat)+' <span style="font-size:15px;color:var(--text-faint)">/ 5</span></div>'+
+      '<div class="stars">'+stars+'</div><div style="color:var(--text-faint);font-size:12px;margin-top:6px">Moyenne sur '+nb+' retour'+(nb>1?'s':'')+'</div></div></div>';
+  }
   html+='</div>';
-  html+='<div class="card panel"><h3>Motifs récurrents (tickets)</h3>';
+  html+='<div class="card panel rise"'+nx()+'><h3>Motifs récurrents (tickets)</h3>';
   var cats=topCategories(5);
   if(!cats.length){ html+=emptyState('tickets','Aucune donnée','Les catégories de tickets apparaîtront ici.'); }
   else {
     var maxc=Math.max.apply(null, cats.map(function(c){return c.count;}).concat([1]));
-    cats.forEach(function(c){
-      html+='<div class="funnel-row"><div class="lbl">'+esc(c.label)+'</div><div class="track"><div class="fill" style="width:'+Math.round(c.count/maxc*100)+'%"></div></div><div class="n">'+c.count+'</div></div>';
+    cats.forEach(function(c,k){
+      html+='<div class="funnel-row"><div class="lbl">'+esc(c.label)+'</div><div class="track"><div class="fill terra" style="width:'+Math.round(c.count/maxc*100)+'%;--i:'+(k+4)+'"></div></div><div class="n">'+c.count+'</div></div>';
     });
   }
   html+='</div></div>';
 
+  html+='</div>';
   return html;
 }
 function kpiTile(label,val,sub,subcls){
@@ -1162,6 +1358,7 @@ function render(){
     case 'team': html=viewTeam(); break;
   }
   v.innerHTML += html;
+  if(S.route==='dashboard') runCountUps();
   renderDrawer();
 }
 
@@ -1582,6 +1779,9 @@ document.addEventListener('click',function(e){
     if(S.route==='kb'){ modalNewKbArticle(); return; }
     modalNewContact(); return;
   }
+
+  var dashAct=e.target.closest('[data-dash-action]');
+  if(dashAct){ if(dashAct.getAttribute('data-dash-action')==='ticket') modalNewTicket(null); else modalNewContact(); return; }
 
   if(e.target.closest('#userchip')){ modalMyRole(); return; }
   var pickRole=e.target.closest('[data-pick-role]');
