@@ -322,7 +322,7 @@ main{overflow-x:clip}
 
 /* CTA with photo */
 .cta-band .inner{isolation:isolate}
-.cta-band .bgimg{position:absolute;inset:0;z-index:-2;background:url("photo-ambition.jpg") center 30%/cover;animation:kenburns 18s ease-in-out infinite alternate}
+.cta-band .bgimg{position:absolute;inset:0;z-index:-2;background:url("photo-ambition.jpg") center 30%/cover}
 .cta-band .inner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(17,26,49,.95) 15%,rgba(17,26,49,.78) 55%,rgba(153,0,0,.55))}
 
 /* scroll reveal: content is visible by default; JS only hides what is below the fold */
@@ -646,10 +646,9 @@ main{overflow-x:clip}
 
 <section id="apropos">
   <div class="wrap">
-    <div class="cta-band reveal">
+    <div class="cta-band">
       <div class="inner">
         <div class="bgimg" aria-hidden="true"></div>
-        <svg class="vpills" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="ctp" width="320" height="64" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="140" height="22" rx="11" fill="#FCC97D"/><rect x="168" y="8" width="120" height="22" rx="11" fill="#FBE8CF"/><rect x="60" y="38" width="180" height="22" rx="11" fill="#FBE8CF"/><rect x="268" y="38" width="40" height="22" rx="11" fill="#FCC97D"/></pattern></defs><g transform="rotate(-90 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#ctp)" style="--p:320px"/></g></svg>
         <h2>Prêt à ouvrir votre CRM ?</h2>
         <p>Connectez-vous avec votre compte pour retrouver vos leads, votre pipeline et vos tickets, partagés avec toute l'équipe SOAGA.</p>
         <div class="ctas">
