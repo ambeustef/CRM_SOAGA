@@ -20,15 +20,18 @@ Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketi
 - **Campagnes marketing (simulées)** — création d'une campagne ciblée (étape/source), lancement générant des statistiques d'envoi/ouverture/clic/conversion simulées pour la démonstration (aucun message n'est réellement envoyé).
 - **Rapports** — filtres par période et par propriétaire, délai moyen de résolution des tickets, CSAT moyen, prévisions par propriétaire, et export CSV des fiches.
 
-## Fichier
+## Fichiers
 
-- `index.html` — l'application complète (HTML/CSS/JS, un seul fichier, sans dépendance de build).
+- `landing.html` — page vitrine publique (façon zoho.com/soaga.net) : présentation du produit, captures d'écran réelles, bouton « Se connecter » vers l'application. C'est la page qu'on verrait avant de se connecter.
+- `index.html` — l'application CRM elle-même (HTML/CSS/JS, un seul fichier, sans dépendance de build). C'est la page « après connexion ».
+- `dashboard.png`, `pipeline.png` — captures d'écran réelles de l'application, utilisées par `landing.html`.
 
 ## Comment l'ouvrir
 
 ### Option 1 — Artefact Claude (version actuelle, avec données partagées en direct)
-Le prototype est publié comme Artefact Claude, avec stockage partagé en temps réel (toute personne ayant le lien voit et modifie les mêmes données) :
-https://claude.ai/artifact/WhV6Y9FvREwGAj2Nu6rtaA
+Les deux pages sont publiées comme Artefacts Claude, avec stockage partagé en temps réel pour le CRM (toute personne ayant le lien voit et modifie les mêmes données) :
+- Page vitrine : https://claude.ai/artifact/3n1sVxCeQsRGNmcovbduhn
+- Application CRM : https://claude.ai/artifact/WhV6Y9FvREwGAj2Nu6rtaA
 
 ### Option 2 — Ouverture locale / hébergement statique
 `index.html` peut aussi être ouvert directement dans un navigateur ou hébergé sur n'importe quel serveur statique (GitHub Pages, Netlify, etc.). Dans ce cas, le stockage partagé spécifique aux Artefacts Claude (`window.claude`) n'est pas disponible : l'application affiche un bandeau d'avertissement et fonctionne en mode lecture seule / état vide, sans backend de secours branché. Pour un déploiement réel (hors Artefact Claude), il faudra remplacer la couche de stockage par une vraie base de données / API.
