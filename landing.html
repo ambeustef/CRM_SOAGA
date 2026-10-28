@@ -222,16 +222,6 @@ main{overflow-x:clip}
 .pill.g{background:var(--gold-soft)}
 @media (max-width:760px){ .pill{height:44px;width:calc(var(--w) * .6)} }
 
-.mosaic{display:grid;grid-template-columns:repeat(4,1fr);height:clamp(240px,27vw,360px)}
-@media (max-width:760px){ .mosaic{grid-template-columns:1fr 1fr;height:auto} .mosaic .tile{height:210px} }
-.tile{position:relative;overflow:hidden}
-.tile svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.tile .pan{animation:pan var(--t,16s) linear infinite}
-.tile:hover .pan{animation-duration:calc(var(--t,16s) / 3)}
-.tile .lbl{position:absolute;left:18px;bottom:18px;right:18px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.tile .lbl b{background:#FFFAFA;color:#111A31;font:900 clamp(17px,1.8vw,22px)/1 var(--display);padding:11px 18px;border-radius:99px;box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
-.tile .lbl span{background:rgba(17,26,49,.82);color:#F3F1EA;font:500 12.5px/1.3 var(--body);padding:6px 11px;border-radius:99px}
-
 .gpill{position:absolute;z-index:-1;border-radius:99px;rotate:35deg;width:var(--w);height:var(--h,110px);background:linear-gradient(90deg,var(--c,var(--accent)) 10%,transparent 92%);opacity:.9;animation:bob 9s ease-in-out infinite}
 .gpill.navy{--c:var(--navy-2)}
 .media{isolation:isolate}
@@ -459,25 +449,6 @@ main{overflow-x:clip}
     </div>
   </div>
 </section>
-
-<div class="mosaic" aria-label="Le cycle client dans le CRM SOAGA">
-  <div class="tile">
-    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt1" width="380" height="120" patternUnits="userSpaceOnUse"><rect x="0" y="11" width="230" height="40" rx="20" fill="#FBE8CF"/><rect x="262" y="11" width="100" height="40" rx="20" fill="#FBE8CF"/><rect x="70" y="71" width="100" height="40" rx="20" fill="#FBE8CF"/><rect x="202" y="71" width="160" height="40" rx="20" fill="#FBE8CF"/></pattern></defs><rect width="400" height="400" fill="#111A31"/><g transform="rotate(-55 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt1)" style="--p:380px;--t:14s"/></g></svg>
-    <div class="lbl"><b>Capter</b><span>Leads &amp; qualification</span></div>
-  </div>
-  <div class="tile">
-    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt2" width="420" height="192" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="170" height="26" rx="13" fill="#6B6C78"/><rect x="200" y="8" width="60" height="26" rx="13" fill="#6B6C78"/><rect x="290" y="8" width="110" height="26" rx="13" fill="#6B6C78"/><rect x="0" y="56" width="90" height="26" rx="13" fill="#6B6C78"/><rect x="250" y="56" width="150" height="26" rx="13" fill="#6B6C78"/><rect x="0" y="104" width="230" height="26" rx="13" fill="#6B6C78"/><rect x="330" y="104" width="50" height="26" rx="13" fill="#6B6C78"/><rect x="0" y="152" width="40" height="26" rx="13" fill="#6B6C78"/><rect x="70" y="152" width="120" height="26" rx="13" fill="#6B6C78"/><rect x="300" y="152" width="100" height="26" rx="13" fill="#6B6C78"/></pattern></defs><rect width="400" height="400" fill="#111A31"/><g transform="rotate(0 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt2)" style="--p:-420px;--t:20s"/></g></svg>
-    <div class="lbl"><b>Convertir</b><span>Pipeline en 8 étapes</span></div>
-  </div>
-  <div class="tile">
-    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt3" width="320" height="64" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="140" height="22" rx="11" fill="#FCC97D"/><rect x="168" y="8" width="120" height="22" rx="11" fill="#FBE8CF"/><rect x="60" y="38" width="180" height="22" rx="11" fill="#FBE8CF"/><rect x="268" y="38" width="40" height="22" rx="11" fill="#FCC97D"/></pattern></defs><rect width="400" height="400" fill="#990000"/><g transform="rotate(90 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt3)" style="--p:-320px;--t:12s"/></g></svg>
-    <div class="lbl"><b>Fidéliser</b><span>Service client &amp; SLA</span></div>
-  </div>
-  <div class="tile">
-    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt4" width="300" height="64" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="110" height="22" rx="11" fill="#990000"/><rect x="140" y="8" width="140" height="22" rx="11" fill="#C87B63"/><rect x="40" y="38" width="170" height="22" rx="11" fill="#C87B63"/><rect x="238" y="38" width="50" height="22" rx="11" fill="#990000"/></pattern></defs><rect width="400" height="400" fill="#FBE8CF"/><g transform="rotate(90 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt4)" style="--p:300px;--t:15s"/></g></svg>
-    <div class="lbl"><b>Mesurer</b><span>Rapports &amp; prévisions</span></div>
-  </div>
-</div>
 
 <section id="fonctionnalites" style="padding-top:20px">
   <div class="wrap">
