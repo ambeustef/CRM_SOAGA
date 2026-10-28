@@ -183,6 +183,132 @@ footer{border-top:1px solid var(--border);padding-block:40px}
 .login-submit{width:100%;justify-content:center;margin-top:4px}
 .login-note{margin-top:18px;font-size:11.5px;line-height:1.6;color:var(--text-faint);text-align:center}
 
+/* ---------- motion & imagery ---------- */
+main{overflow-x:clip}
+:root{--critical:#B42318;--critical-soft:#FDECEA;--ok:#1F7A4D}
+:root[data-theme="dark"]{--critical:#F97066;--critical-soft:#3A1515;--ok:#4ADE9A}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--critical:#F97066;--critical-soft:#3A1515;--ok:#4ADE9A} }
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes drift{0%,100%{translate:0 0}50%{translate:18px -10px}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.12)}}
+@keyframes grow{from{width:0}}
+
+.hero .stagger>*{animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+.hero .stagger>*:nth-child(1){animation-delay:.05s}
+.hero .stagger>*:nth-child(2){animation-delay:.15s}
+.hero .stagger>*:nth-child(3){animation-delay:.28s}
+.hero .stagger>*:nth-child(4){animation-delay:.4s}
+.hero .stagger>*:nth-child(5){animation-delay:.52s}
+.pattern .bar{animation:drift 9s ease-in-out infinite}
+.pattern .bar:nth-child(2n){animation-duration:12s;animation-delay:-3s}
+.pattern .bar:nth-child(3n){animation-duration:15s;animation-delay:-6s}
+
+.avatars{display:flex;flex-wrap:wrap;text-align:center;align-items:center;justify-content:center;gap:12px;font-size:12.5px;color:var(--text-faint)}
+.avatars .stack{display:flex}
+.avatars .stack img{width:34px;height:34px;border-radius:99px;object-fit:cover;object-position:50% 18%;border:2px solid var(--bg);margin-left:-10px;background:var(--surface-2)}
+.avatars .stack img:first-child{margin-left:0}
+
+.hero-stage{position:relative;max-width:980px;margin:44px auto 0;animation:fadeUp 1s .55s cubic-bezier(.2,.7,.2,1) both}
+.hero-stage .device{margin-top:0;animation:floatY 7s ease-in-out 1.6s infinite}
+.float-card{position:absolute;z-index:2;display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:11px 14px;box-shadow:var(--shadow-lg);font-size:13px;line-height:1.3;white-space:nowrap;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both, floatY 6s ease-in-out infinite}
+.float-card b{display:block;font:700 13.5px var(--display);color:var(--text)}
+.float-card span{color:var(--text-muted)}
+.float-card img{width:38px;height:38px;border-radius:99px;object-fit:cover;object-position:50% 15%;flex:none}
+.float-card .ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.fc-1{left:-56px;top:16%;animation-delay:1.1s,1.9s}
+.fc-2{right:-60px;top:34%;animation-delay:1.3s,2.6s;animation-duration:.8s,7s}
+.fc-3{left:-30px;bottom:12%;animation-delay:1.5s,3.2s;animation-duration:.8s,8s}
+.fc-2 .ic{background:var(--gold-soft);color:var(--gold-ink)}
+.fc-3 .ic{background:var(--accent-soft);color:var(--accent)}
+.fc-2 .amt{font:700 14px "Roboto Mono",ui-monospace,monospace;color:var(--ok)}
+.stars{color:var(--gold);letter-spacing:1px}
+@media (max-width:1120px){ .fc-1{left:-12px} .fc-2{right:-12px} .fc-3{left:8px} }
+@media (max-width:760px){ .float-card{display:none} }
+
+/* marquee */
+.marquee{background:var(--accent);color:var(--on-accent);overflow:hidden;padding-block:16px;margin-top:-1px}
+.marquee .track{display:flex;width:max-content;animation:marquee 32s linear infinite}
+.marquee .track span{display:inline-flex;align-items:center;gap:22px;padding-right:22px;font:900 clamp(17px,2.2vw,22px)/1 var(--display);letter-spacing:.01em;white-space:nowrap}
+.marquee .track span::after{content:"";width:22px;height:9px;border-radius:99px;background:var(--gold);transform:rotate(-28deg)}
+.marquee:hover .track{animation-play-state:paused}
+
+/* personas */
+.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:860px){ .persona-grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto} }
+.persona{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:var(--navy);box-shadow:var(--shadow);isolation:isolate}
+.persona img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:transform .9s cubic-bezier(.2,.7,.2,1);z-index:-1}
+.persona:hover img{transform:scale(1.07)}
+.persona::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(10,16,32,.92) 100%)}
+.persona .body{position:absolute;left:0;right:0;bottom:0;padding:22px;color:#F3F1EA}
+.persona .tag{display:inline-block;font:700 11px var(--display);letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:#fff;border-radius:99px;padding:4px 10px;margin-bottom:10px}
+.persona h3{font-size:20px;margin-bottom:6px;color:#fff}
+.persona p{font-size:13.5px;line-height:1.5;color:#D9DCE6}
+
+/* features: hover lift */
+.feature{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s}
+.feature:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--border-strong)}
+.feature .ico{transition:transform .35s}
+.feature:hover .ico{transform:rotate(-8deg) scale(1.08)}
+
+/* photo split */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.split.rev{grid-template-columns:1fr 1.05fr}
+@media (max-width:860px){ .split,.split.rev{grid-template-columns:1fr;gap:36px} .split.rev .media{order:-1} }
+.split h2{font-size:clamp(24px,3.2vw,32px);margin:14px 0}
+.split p{color:var(--text-muted);font-size:15.5px;line-height:1.65}
+.media{position:relative}
+.media .photo{border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:3/2}
+.media .photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.media:hover .photo img{transform:scale(1.05)}
+.media .deco{position:absolute;z-index:-1;border-radius:99px;background:var(--terracotta-soft);width:240px;height:28px;transform:rotate(-28deg)}
+.media .card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 16px;font-size:13px;animation:floatY 6s ease-in-out infinite}
+.live{display:flex;align-items:center;gap:8px;font:700 11px var(--display);letter-spacing:.07em;text-transform:uppercase;color:var(--ok);margin-bottom:8px}
+.live i{width:8px;height:8px;border-radius:99px;background:var(--ok);animation:pulse 1.6s ease-out infinite}
+.feed{display:flex;flex-direction:column;gap:7px;min-width:220px}
+.feed div{display:flex;gap:8px;align-items:center;color:var(--text)}
+.feed em{font-style:normal;color:var(--text-faint);margin-left:auto;font-size:11.5px}
+.feed .d{width:22px;height:22px;border-radius:99px;flex:none;display:flex;align-items:center;justify-content:center;font:700 10px var(--display);color:#fff}
+
+/* campaign */
+.campaign .poster{border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:1/1;max-width:440px;margin-inline:auto}
+.campaign .poster img{width:100%;height:100%;object-fit:cover}
+.kpis{margin-top:24px;display:flex;flex-direction:column;gap:14px;max-width:440px}
+.kpi .row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+.kpi .row b{font:700 13.5px "Roboto Mono",ui-monospace,monospace}
+.kpi .track{height:9px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.kpi .fill{height:100%;border-radius:99px;background:var(--accent);width:var(--w);transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.kpi:nth-child(2) .fill{background:var(--terracotta)}
+.kpi:nth-child(3) .fill{background:var(--gold)}
+.kpi:nth-child(4) .fill{background:var(--navy-2)}
+.is-pre .kpi .fill{width:0}
+.sim-note{margin-top:14px;font-size:12px;color:var(--text-faint)}
+
+/* CTA with photo */
+.cta-band .inner{isolation:isolate}
+.cta-band .bgimg{position:absolute;inset:0;z-index:-2;background:url("photo-ambition.jpg") center 30%/cover;animation:kenburns 18s ease-in-out infinite alternate}
+.cta-band .inner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(17,26,49,.95) 15%,rgba(17,26,49,.78) 55%,rgba(153,0,0,.55))}
+
+/* scroll reveal: content is visible by default; JS only hides what is below the fold */
+.reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.is-pre{opacity:0;transform:translateY(28px)}
+.reveal-group>*{transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal-group.is-pre>*{opacity:0;transform:translateY(26px)}
+.reveal-group>*:nth-child(2){transition-delay:.08s}
+.reveal-group>*:nth-child(3){transition-delay:.16s}
+.reveal-group>*:nth-child(4){transition-delay:.24s}
+.reveal-group>*:nth-child(5){transition-delay:.32s}
+.reveal-group>*:nth-child(6){transition-delay:.4s}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .marquee .track{transform:none}
+}
+
 [hidden]{display:none!important}
 </style>
 
@@ -194,10 +320,10 @@ footer{border-top:1px solid var(--border);padding-block:40px}
       <span class="crmtag">CRM</span>
     </a>
     <nav class="navlinks">
+      <a href="#clients">Vos clients</a>
       <a href="#fonctionnalites">Fonctionnalités</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#securite">Rôles &amp; sécurité</a>
-      <a href="#apropos">À propos</a>
     </nav>
     <button type="button" class="btn btn-accent" data-open-login>Se connecter</button>
   </div>
@@ -205,7 +331,7 @@ footer{border-top:1px solid var(--border);padding-block:40px}
 
 <main id="top">
 
-<section class="hero">
+<section class="hero" style="padding-bottom:56px">
   <div class="pattern" aria-hidden="true">
     <div class="bar" style="width:220px;height:16px;top:120px;left:-40px;transform:rotate(-28deg)"></div>
     <div class="bar" style="width:140px;height:16px;top:160px;left:160px;transform:rotate(-28deg)"></div>
@@ -213,44 +339,97 @@ footer{border-top:1px solid var(--border);padding-block:40px}
     <div class="bar" style="width:220px;height:16px;top:90px;right:-60px;transform:rotate(-28deg)"></div>
     <div class="bar" style="width:150px;height:16px;top:140px;right:140px;transform:rotate(-28deg)"></div>
     <div class="bar" style="width:16px;height:16px;top:180px;right:250px;transform:rotate(-28deg);background:var(--gold-soft)"></div>
+    <div class="bar" style="width:260px;height:16px;top:620px;left:-70px;transform:rotate(-28deg);background:var(--accent-soft)"></div>
+    <div class="bar" style="width:240px;height:16px;top:700px;right:-50px;transform:rotate(-28deg);background:var(--accent-soft)"></div>
   </div>
   <div class="wrap">
-    <div class="hero-grid">
-      <span class="eyebrow"><span class="dot"></span> CRM interne SOAGA · Prototype</span>
+    <div class="hero-grid stagger">
+      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> CRM interne SOAGA · Prototype</span>
       <h1>Toute la relation client SOAGA, dans <em>un seul outil</em>.</h1>
       <p class="sub">Leads, pipeline commercial, clients, service après-vente, campagnes et rapports — un CRM à l'image de la marque SOAGA, avec des données partagées et à jour pour toute l'équipe.</p>
       <div class="ctas">
         <button type="button" class="btn btn-accent btn-lg" data-open-login>Se connecter au CRM →</button>
         <a class="btn btn-ghost btn-lg" href="#fonctionnalites">Découvrir les fonctionnalités</a>
       </div>
-      <span class="fineprint">Réservé aux équipes SOAGA — accès via le lien partagé par votre administrateur.</span>
+      <div class="avatars">
+        <div class="stack" aria-hidden="true">
+          <img src="persona-jeunes.jpg" alt=""><img src="persona-cadres.jpg" alt=""><img src="persona-institutionnels.jpg" alt=""><img src="photo-equipe.jpg" alt="">
+        </div>
+        <span>Commercial, service client, marketing, direction : une seule vue partagée.</span>
+      </div>
     </div>
-    <div class="device" style="max-width:980px;margin-inline:auto">
-      <div class="chrome"><i></i><i></i><i></i></div>
-      <div class="screen"><img src="dashboard.png" alt="Tableau de bord du CRM SOAGA : leads actifs, taux de conversion, valeur du pipeline, tickets ouverts et activité récente de l'équipe."></div>
+
+    <div class="hero-stage">
+      <div class="float-card fc-1">
+        <img src="persona-jeunes.jpg" alt="">
+        <div><b>Nouveau lead</b><span>Aïcha K. · Site web · <span style="color:var(--accent);font-weight:700">Chaud</span></span></div>
+      </div>
+      <div class="float-card fc-2">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+        <div><b>Opportunité gagnée</b><span class="amt">+42 000 000 FCFA</span></div>
+      </div>
+      <div class="float-card fc-3">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><b>Ticket résolu en 3 h</b><span>CSAT <span class="stars">★★★★★</span></span></div>
+      </div>
+      <div class="device">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <div class="screen"><img src="dashboard.png" alt="Tableau de bord du CRM SOAGA : leads actifs, taux de conversion, valeur du pipeline, tickets ouverts et activité récente de l'équipe."></div>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="marquee" aria-label="Valeurs de la marque SOAGA">
+  <div class="track">
+    <span>Précurseur</span><span>Expert</span><span>Altruiste</span><span>Exclusif</span><span>Constance &amp; fiabilité</span><span>Épargnez simplement, réalisez aisément.</span>
+    <span aria-hidden="true">Précurseur</span><span aria-hidden="true">Expert</span><span aria-hidden="true">Altruiste</span><span aria-hidden="true">Exclusif</span><span aria-hidden="true">Constance &amp; fiabilité</span><span aria-hidden="true">Épargnez simplement, réalisez aisément.</span>
+  </div>
+</div>
 
 <section class="stats">
   <div class="wrap">
-    <div class="inner">
+    <div class="inner reveal-group">
       <div class="item"><div class="n">1ère</div><div class="l">Institution financière régionale spécialisée dans la gestion d'actifs</div></div>
       <div class="item"><div class="n">Leader</div><div class="l">De la gestion collective dans la zone UEMOA (2022)</div></div>
-      <div class="item"><div class="n">15+</div><div class="l">Ans d'expertise en gestion d'actifs et épargne collective</div></div>
-      <div class="item"><div class="n">90%</div><div class="l">De clients satisfaits de l'accompagnement SOAGA</div></div>
+      <div class="item"><div class="n"><span data-count="15">15</span>+</div><div class="l">Ans d'expertise en gestion d'actifs et épargne collective</div></div>
+      <div class="item"><div class="n"><span data-count="90">90</span>%</div><div class="l">De clients satisfaits de l'accompagnement SOAGA</div></div>
     </div>
   </div>
 </section>
 
-<section id="fonctionnalites">
+<section id="clients" style="padding-top:40px">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span> Vos clients</span>
+      <h2 style="margin-top:14px">Chaque profil SOAGA, suivi avec la même exigence</h2>
+      <p>Du premier plan d'épargne à la gestion sous mandat, le CRM regroupe chaque client avec son historique, ses opportunités et ses demandes.</p>
+    </div>
+    <div class="persona-grid reveal-group">
+      <article class="persona">
+        <img src="persona-jeunes.jpg" alt="Jeune étudiante souriante tenant des cahiers.">
+        <div class="body"><span class="tag">Épargne</span><h3>Jeunes actifs &amp; étudiants</h3><p>Premiers placements, épargne programmée et relances automatiques pour les accompagner dans la durée.</p></div>
+      </article>
+      <article class="persona">
+        <img src="persona-cadres.jpg" alt="Cadre en costume bleu, regard assuré.">
+        <div class="body"><span class="tag">Placement</span><h3>Cadres &amp; managers</h3><p>Opportunités suivies dans le pipeline, rendez-vous planifiés et conseils personnalisés.</p></div>
+      </article>
+      <article class="persona">
+        <img src="persona-institutionnels.jpg" alt="Dirigeants se serrant la main autour d'une table de réunion.">
+        <div class="body"><span class="tag">Gestion d'actifs</span><h3>VIP, dirigeants &amp; institutionnels</h3><p>Vision 360°, SLA prioritaires et historique complet de chaque échange avec la direction.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="fonctionnalites" style="padding-top:20px">
+  <div class="wrap">
+    <div class="section-head reveal">
       <span class="eyebrow"><span class="dot"></span> Fonctionnalités</span>
       <h2 style="margin-top:14px">Un outil, du premier contact à la fidélisation</h2>
       <p>Chaque module du cahier de besoins SOAGA, pensé pour l'équipe commerciale, le service client et la direction.</p>
     </div>
-    <div class="feature-grid">
+    <div class="feature-grid reveal-group">
       <div class="feature">
         <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Leads &amp; qualification</h3>
@@ -285,10 +464,38 @@ footer{border-top:1px solid var(--border);padding-block:40px}
   </div>
 </section>
 
-<section id="pipeline" style="padding-top:0">
+<section style="padding-top:20px">
+  <div class="wrap split">
+    <div class="media reveal">
+      <div class="deco" style="top:-18px;left:-50px"></div>
+      <div class="deco" style="bottom:20px;right:-60px;background:var(--gold-soft)"></div>
+      <div class="photo"><img src="photo-equipe.jpg" alt="Conseillère SOAGA travaillant sur son ordinateur portable."></div>
+      <div class="card" style="right:-14px;bottom:-26px">
+        <div class="live"><i></i> En direct</div>
+        <div class="feed">
+          <div><span class="d" style="background:var(--accent)">AK</span> Lead qualifié <em>à l'instant</em></div>
+          <div><span class="d" style="background:var(--navy-2)">MD</span> RDV planifié <em>2 min</em></div>
+          <div><span class="d" style="background:var(--terracotta)">FS</span> Ticket clôturé <em>5 min</em></div>
+        </div>
+      </div>
+    </div>
+    <div class="copy reveal">
+      <span class="eyebrow"><span class="dot"></span> Travail d'équipe</span>
+      <h2>Une équipe, une seule version de la vérité</h2>
+      <p>Un lead créé par un commercial, un rendez-vous ajouté par un conseiller, un ticket clôturé par le service client : chacun voit la mise à jour à l'instant, sans ressaisie ni fichier Excel qui circule.</p>
+      <ul style="list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px">
+        <li style="display:flex;gap:10px;font-size:14.5px"><svg style="flex:none;color:var(--accent);margin-top:3px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Données partagées en temps réel</li>
+        <li style="display:flex;gap:10px;font-size:14.5px"><svg style="flex:none;color:var(--accent);margin-top:3px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Chaque action tracée : qui, quoi, quand</li>
+        <li style="display:flex;gap:10px;font-size:14.5px"><svg style="flex:none;color:var(--accent);margin-top:3px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Affichage adapté à chaque rôle</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
   <div class="wrap">
     <div class="showcase">
-      <div class="copy">
+      <div class="copy reveal">
         <span class="eyebrow"><span class="dot"></span> Pipeline commercial</span>
         <h2>De la capture à la conversion, un pipeline qui se glisse</h2>
         <p>Nouveau lead, qualification, prospect, opportunité, client — chaque fiche avance d'une colonne à l'autre d'un geste. Le montant et la probabilité se mettent à jour avec elle.</p>
@@ -298,7 +505,7 @@ footer{border-top:1px solid var(--border);padding-block:40px}
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Chaque changement d'étape journalisé automatiquement</li>
         </ul>
       </div>
-      <div class="device">
+      <div class="device reveal">
         <div class="chrome"><i></i><i></i><i></i></div>
         <div class="screen"><img src="pipeline.png" alt="Vue Kanban du pipeline commercial SOAGA CRM avec des fiches réparties sur les étapes Nouveau lead, À qualifier, Qualifié, Prospect et Opportunité."></div>
       </div>
@@ -306,13 +513,34 @@ footer{border-top:1px solid var(--border);padding-block:40px}
   </div>
 </section>
 
+<section class="campaign" style="padding-top:20px">
+  <div class="wrap split rev">
+    <div class="copy reveal">
+      <span class="eyebrow"><span class="dot"></span> Campagnes marketing</span>
+      <h2>Des campagnes aux couleurs SOAGA, mesurées de bout en bout</h2>
+      <p>Ciblez un segment — par étape du pipeline ou par source — lancez la campagne et suivez ses résultats depuis le CRM.</p>
+      <div class="kpis reveal-group" id="kpis">
+        <div class="kpi"><div class="row"><span>Envoyés</span><b>2 400</b></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+        <div class="kpi"><div class="row"><span>Ouverts</span><b>58 %</b></div><div class="track"><div class="fill" style="--w:58%"></div></div></div>
+        <div class="kpi"><div class="row"><span>Cliqués</span><b>23 %</b></div><div class="track"><div class="fill" style="--w:23%"></div></div></div>
+        <div class="kpi"><div class="row"><span>Convertis</span><b>7 %</b></div><div class="track"><div class="fill" style="--w:7%"></div></div></div>
+      </div>
+      <p class="sim-note">Exemple de campagne · statistiques simulées pour la démonstration.</p>
+    </div>
+    <div class="media reveal">
+      <div class="deco" style="top:30px;left:-40px"></div>
+      <div class="poster"><img src="campagne-1.jpg" alt="Visuel de campagne SOAGA : jeune homme souriant sur fond rouge de la marque."></div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow"><span class="dot"></span> Pourquoi ce CRM</span>
       <h2 style="margin-top:14px">Pensé pour l'équipe SOAGA</h2>
     </div>
-    <div class="values">
+    <div class="values reveal-group">
       <div class="value">
         <div class="num">01</div>
         <h3>À l'image de la marque</h3>
@@ -334,13 +562,13 @@ footer{border-top:1px solid var(--border);padding-block:40px}
 
 <section class="security" id="securite">
   <div class="wrap">
-    <div>
+    <div class="reveal">
       <span class="eyebrow"><span class="dot"></span> Rôles &amp; sécurité</span>
       <h2 style="margin-top:14px">Un rôle par métier, une protection réelle</h2>
       <p>Chaque personne choisit son rôle — Commercial, Service client, Marketing, Direction ou Administrateur — pour adapter l'affichage à son métier.</p>
       <div class="sec-note">Prototype transparent : la différenciation par rôle est surtout visuelle. La seule restriction réellement appliquée côté stockage est la gestion des rôles de l'équipe, réservée aux administrateurs.</div>
     </div>
-    <div class="sec-list">
+    <div class="sec-list reveal-group">
       <div class="sec-item">
         <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
         <div><h4>Page Équipe protégée</h4><p>Changer le rôle d'un autre membre demande un accès éditeur sur l'espace — vérifié par le stockage, pas seulement masqué à l'écran.</p></div>
@@ -359,8 +587,9 @@ footer{border-top:1px solid var(--border);padding-block:40px}
 
 <section id="apropos">
   <div class="wrap">
-    <div class="cta-band">
+    <div class="cta-band reveal">
       <div class="inner">
+        <div class="bgimg" aria-hidden="true"></div>
         <h2>Prêt à ouvrir votre CRM ?</h2>
         <p>Connectez-vous avec votre compte pour retrouver vos leads, votre pipeline et vos tickets, partagés avec toute l'équipe SOAGA.</p>
         <div class="ctas">
@@ -386,6 +615,46 @@ footer{border-top:1px solid var(--border);padding-block:40px}
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)) return;
+
+  // Count-up for numeric stats
+  function countUp(el){
+    var target=+el.getAttribute('data-count'), start=null, dur=1400;
+    function step(t){
+      if(!start) start=t;
+      var p=Math.min(1,(t-start)/dur), e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*e);
+      if(p<1) requestAnimationFrame(step);
+    }
+    el.textContent='0';
+    requestAnimationFrame(step);
+  }
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var el=en.target;
+      el.classList.remove('is-pre');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(el);
+    });
+  },{threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+
+  // Only hide elements that start below the fold, so nothing is ever stuck invisible.
+  var vh=window.innerHeight;
+  document.querySelectorAll('.reveal,.reveal-group').forEach(function(el){
+    if(el.getBoundingClientRect().top > vh*0.9){
+      el.classList.add('is-pre');
+      io.observe(el);
+    }
+  });
+})();
+</script>
 
 <div class="login-overlay" id="login-overlay" hidden>
   <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="login-title">

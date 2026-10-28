@@ -25,6 +25,7 @@ Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketi
 - `landing.html` — page vitrine publique (façon zoho.com/soaga.net) : présentation du produit, captures d'écran réelles, bouton « Se connecter » vers l'application. C'est la page qu'on verrait avant de se connecter.
 - `index.html` — l'application CRM elle-même (HTML/CSS/JS, un seul fichier, sans dépendance de build). C'est la page « après connexion ».
 - `dashboard.png`, `pipeline.png` — captures d'écran réelles de l'application, utilisées par `landing.html`.
+- `persona-*.jpg`, `photo-*.jpg`, `campagne-1.jpg` — photos issues du Brand Guideline SOAGA 2026, utilisées par `landing.html` (personas clients, visuels d'équipe et de campagne).
 
 ## Comment l'ouvrir
 
