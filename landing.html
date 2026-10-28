@@ -207,6 +207,39 @@ main{overflow-x:clip}
 .pattern .bar:nth-child(2n){animation-duration:12s;animation-delay:-3s}
 .pattern .bar:nth-child(3n){animation-duration:15s;animation-delay:-6s}
 
+/* ---------- brand motifs (Brand Guideline, « Motifs et patterns ») ---------- */
+@keyframes pillInR{from{transform:translateX(115%)}to{transform:none}}
+@keyframes pillInL{from{transform:translateX(-115%)}to{transform:none}}
+@keyframes swayR{0%,100%{translate:0 0}50%{translate:-34px 0}}
+@keyframes swayL{0%,100%{translate:0 0}50%{translate:34px 0}}
+@keyframes pan{to{transform:translateX(var(--p))}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:14px -18px}}
+.hero .pattern{opacity:1}
+.pill{position:absolute;height:74px;width:var(--w);border-radius:99px;background:var(--terracotta-soft)}
+.pill.r{animation:pillInR 1.5s cubic-bezier(.2,.7,.2,1) var(--d,0s) both, swayR 10s ease-in-out calc(var(--d,0s) + 1.5s) infinite}
+.pill.l{animation:pillInL 1.5s cubic-bezier(.2,.7,.2,1) var(--d,0s) both, swayL 11s ease-in-out calc(var(--d,0s) + 1.5s) infinite}
+.pill.a{background:var(--accent-soft)}
+.pill.g{background:var(--gold-soft)}
+@media (max-width:760px){ .pill{height:44px;width:calc(var(--w) * .6)} }
+
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);height:clamp(240px,27vw,360px)}
+@media (max-width:760px){ .mosaic{grid-template-columns:1fr 1fr;height:auto} .mosaic .tile{height:210px} }
+.tile{position:relative;overflow:hidden}
+.tile svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tile .pan{animation:pan var(--t,16s) linear infinite}
+.tile:hover .pan{animation-duration:calc(var(--t,16s) / 3)}
+.tile .lbl{position:absolute;left:18px;bottom:18px;right:18px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.tile .lbl b{background:#FFFAFA;color:#111A31;font:900 clamp(17px,1.8vw,22px)/1 var(--display);padding:11px 18px;border-radius:99px;box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
+.tile .lbl span{background:rgba(17,26,49,.82);color:#F3F1EA;font:500 12.5px/1.3 var(--body);padding:6px 11px;border-radius:99px}
+
+.gpill{position:absolute;z-index:-1;border-radius:99px;rotate:35deg;width:var(--w);height:var(--h,110px);background:linear-gradient(90deg,var(--c,var(--accent)) 10%,transparent 92%);opacity:.9;animation:bob 9s ease-in-out infinite}
+.gpill.navy{--c:var(--navy-2)}
+.media{isolation:isolate}
+
+.cta-band .vpills{position:absolute;top:0;right:0;bottom:0;width:42%;z-index:-1;opacity:.6;-webkit-mask-image:linear-gradient(to left,#000 30%,transparent);mask-image:linear-gradient(to left,#000 30%,transparent)}
+.cta-band .vpills .pan{animation:pan 18s linear infinite}
+@media (max-width:760px){ .cta-band .vpills{width:70%;opacity:.35} }
+
 .avatars{display:flex;flex-wrap:wrap;text-align:center;align-items:center;justify-content:center;gap:12px;font-size:12.5px;color:var(--text-faint)}
 .avatars .stack{display:flex}
 .avatars .stack img{width:34px;height:34px;border-radius:99px;object-fit:cover;object-position:50% 18%;border:2px solid var(--bg);margin-left:-10px;background:var(--surface-2)}
@@ -333,14 +366,19 @@ main{overflow-x:clip}
 
 <section class="hero" style="padding-bottom:56px">
   <div class="pattern" aria-hidden="true">
-    <div class="bar" style="width:220px;height:16px;top:120px;left:-40px;transform:rotate(-28deg)"></div>
-    <div class="bar" style="width:140px;height:16px;top:160px;left:160px;transform:rotate(-28deg)"></div>
-    <div class="bar" style="width:16px;height:16px;top:200px;left:260px;transform:rotate(-28deg);background:var(--gold-soft)"></div>
-    <div class="bar" style="width:220px;height:16px;top:90px;right:-60px;transform:rotate(-28deg)"></div>
-    <div class="bar" style="width:150px;height:16px;top:140px;right:140px;transform:rotate(-28deg)"></div>
-    <div class="bar" style="width:16px;height:16px;top:180px;right:250px;transform:rotate(-28deg);background:var(--gold-soft)"></div>
-    <div class="bar" style="width:260px;height:16px;top:620px;left:-70px;transform:rotate(-28deg);background:var(--accent-soft)"></div>
-    <div class="bar" style="width:240px;height:16px;top:700px;right:-50px;transform:rotate(-28deg);background:var(--accent-soft)"></div>
+    <div class="pill r" style="--w:460px;top:34px;right:-210px;--d:.1s"></div>
+    <div class="pill r a" style="--w:150px;top:130px;right:210px;--d:.35s"></div>
+    <div class="pill r" style="--w:330px;top:140px;right:-150px;--d:.25s"></div>
+    <div class="pill r" style="--w:560px;top:330px;right:-330px;--d:.45s"></div>
+    <div class="pill r g" style="--w:170px;top:470px;right:40px;--d:.6s"></div>
+    <div class="pill r" style="--w:420px;top:660px;right:-210px;--d:.7s"></div>
+    <div class="pill r a" style="--w:300px;top:860px;right:-120px;--d:.8s"></div>
+    <div class="pill l" style="--w:400px;top:84px;left:-220px;--d:.2s"></div>
+    <div class="pill l g" style="--w:150px;top:190px;left:40px;--d:.4s"></div>
+    <div class="pill l" style="--w:520px;top:380px;left:-330px;--d:.5s"></div>
+    <div class="pill l a" style="--w:260px;top:560px;left:-90px;--d:.65s"></div>
+    <div class="pill l" style="--w:460px;top:740px;left:-250px;--d:.75s"></div>
+    <div class="pill l" style="--w:180px;top:930px;left:20px;--d:.85s"></div>
   </div>
   <div class="wrap">
     <div class="hero-grid stagger">
@@ -422,6 +460,25 @@ main{overflow-x:clip}
   </div>
 </section>
 
+<div class="mosaic" aria-label="Le cycle client dans le CRM SOAGA">
+  <div class="tile">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt1" width="380" height="120" patternUnits="userSpaceOnUse"><rect x="0" y="11" width="230" height="40" rx="20" fill="#FBE8CF"/><rect x="262" y="11" width="100" height="40" rx="20" fill="#FBE8CF"/><rect x="70" y="71" width="100" height="40" rx="20" fill="#FBE8CF"/><rect x="202" y="71" width="160" height="40" rx="20" fill="#FBE8CF"/></pattern></defs><rect width="400" height="400" fill="#111A31"/><g transform="rotate(-55 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt1)" style="--p:380px;--t:14s"/></g></svg>
+    <div class="lbl"><b>Capter</b><span>Leads &amp; qualification</span></div>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt2" width="420" height="192" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="170" height="26" rx="13" fill="#6B6C78"/><rect x="200" y="8" width="60" height="26" rx="13" fill="#6B6C78"/><rect x="290" y="8" width="110" height="26" rx="13" fill="#6B6C78"/><rect x="0" y="56" width="90" height="26" rx="13" fill="#6B6C78"/><rect x="250" y="56" width="150" height="26" rx="13" fill="#6B6C78"/><rect x="0" y="104" width="230" height="26" rx="13" fill="#6B6C78"/><rect x="330" y="104" width="50" height="26" rx="13" fill="#6B6C78"/><rect x="0" y="152" width="40" height="26" rx="13" fill="#6B6C78"/><rect x="70" y="152" width="120" height="26" rx="13" fill="#6B6C78"/><rect x="300" y="152" width="100" height="26" rx="13" fill="#6B6C78"/></pattern></defs><rect width="400" height="400" fill="#111A31"/><g transform="rotate(0 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt2)" style="--p:-420px;--t:20s"/></g></svg>
+    <div class="lbl"><b>Convertir</b><span>Pipeline en 8 étapes</span></div>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt3" width="320" height="64" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="140" height="22" rx="11" fill="#FCC97D"/><rect x="168" y="8" width="120" height="22" rx="11" fill="#FBE8CF"/><rect x="60" y="38" width="180" height="22" rx="11" fill="#FBE8CF"/><rect x="268" y="38" width="40" height="22" rx="11" fill="#FCC97D"/></pattern></defs><rect width="400" height="400" fill="#990000"/><g transform="rotate(90 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt3)" style="--p:-320px;--t:12s"/></g></svg>
+    <div class="lbl"><b>Fidéliser</b><span>Service client &amp; SLA</span></div>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="mt4" width="300" height="64" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="110" height="22" rx="11" fill="#990000"/><rect x="140" y="8" width="140" height="22" rx="11" fill="#C87B63"/><rect x="40" y="38" width="170" height="22" rx="11" fill="#C87B63"/><rect x="238" y="38" width="50" height="22" rx="11" fill="#990000"/></pattern></defs><rect width="400" height="400" fill="#FBE8CF"/><g transform="rotate(90 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#mt4)" style="--p:300px;--t:15s"/></g></svg>
+    <div class="lbl"><b>Mesurer</b><span>Rapports &amp; prévisions</span></div>
+  </div>
+</div>
+
 <section id="fonctionnalites" style="padding-top:20px">
   <div class="wrap">
     <div class="section-head reveal">
@@ -467,8 +524,9 @@ main{overflow-x:clip}
 <section style="padding-top:20px">
   <div class="wrap split">
     <div class="media reveal">
-      <div class="deco" style="top:-18px;left:-50px"></div>
-      <div class="deco" style="bottom:20px;right:-60px;background:var(--gold-soft)"></div>
+      <div class="gpill" style="--w:380px;top:-70px;left:-130px"></div>
+      <div class="gpill navy" style="--w:150px;--h:100px;top:60px;left:-90px;animation-delay:-3s"></div>
+      <div class="gpill" style="--w:460px;--h:130px;bottom:-60px;right:-170px;animation-delay:-5s;opacity:.55"></div>
       <div class="photo"><img src="photo-equipe.jpg" alt="Conseillère SOAGA travaillant sur son ordinateur portable."></div>
       <div class="card" style="right:-14px;bottom:-26px">
         <div class="live"><i></i> En direct</div>
@@ -528,7 +586,8 @@ main{overflow-x:clip}
       <p class="sim-note">Exemple de campagne · statistiques simulées pour la démonstration.</p>
     </div>
     <div class="media reveal">
-      <div class="deco" style="top:30px;left:-40px"></div>
+      <div class="gpill" style="--w:420px;--h:120px;top:-40px;right:-120px;animation-delay:-2s"></div>
+      <div class="gpill navy" style="--w:170px;--h:110px;bottom:10px;left:-60px;animation-delay:-6s"></div>
       <div class="poster"><img src="campagne-1.jpg" alt="Visuel de campagne SOAGA : jeune homme souriant sur fond rouge de la marque."></div>
     </div>
   </div>
@@ -590,6 +649,7 @@ main{overflow-x:clip}
     <div class="cta-band reveal">
       <div class="inner">
         <div class="bgimg" aria-hidden="true"></div>
+        <svg class="vpills" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="ctp" width="320" height="64" patternUnits="userSpaceOnUse"><rect x="0" y="8" width="140" height="22" rx="11" fill="#FCC97D"/><rect x="168" y="8" width="120" height="22" rx="11" fill="#FBE8CF"/><rect x="60" y="38" width="180" height="22" rx="11" fill="#FBE8CF"/><rect x="268" y="38" width="40" height="22" rx="11" fill="#FCC97D"/></pattern></defs><g transform="rotate(-90 200 200)"><rect class="pan" x="-800" y="-800" width="2000" height="2000" fill="url(#ctp)" style="--p:320px"/></g></svg>
         <h2>Prêt à ouvrir votre CRM ?</h2>
         <p>Connectez-vous avec votre compte pour retrouver vos leads, votre pipeline et vos tickets, partagés avec toute l'équipe SOAGA.</p>
         <div class="ctas">
