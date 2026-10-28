@@ -46,6 +46,10 @@ Règle de la charte : **3 couleurs maximum** par création.
 
 Précurseur, expert, altruiste, exclusif, constant et fiable. Message : accessibilité, simplicité, expertise financière, panafricanisme. Accroche courante : « Épargnez simplement, réalisez aisément. »
 
+## Logo — fichier réel
+
+`logo-icon.png` est le **vrai** pictogramme SOAGA (carré rouge arrondi + silhouette Afrique en blocs blancs), extrait directement des pages « Logotype » et « Supports Web » du Brand Guideline officiel (rendu haute résolution du PDF, fond détouré en transparent). Ce n'est plus une reconstitution approximative : `index.html` et `landing.html` chargent ce fichier via `<img src="logo-icon.png">` partout où le logo apparaît (barre latérale, navigation, pied de page). Ne jamais revenir à un SVG recomposé à la main pour ce pictogramme.
+
 ## Où c'est appliqué dans ce repo
 
 `index.html` (le CRM) utilise ces valeurs comme tokens CSS (`--accent`, `--navy`, etc. dans `:root`) — modifier la palette ou les polices se fait à cet endroit uniquement, jamais en dur dans les composants.
