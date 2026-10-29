@@ -15,7 +15,16 @@ Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketi
 - **Tickets & réclamations** — catégorie, priorité, statut, et calcul automatique du respect du SLA (4h / 24h / 72h / 5j selon la priorité).
 - **Tableau de bord** — KPI (leads actifs, taux de conversion, valeur du pipeline, tickets ouverts, CSAT moyen), répartition du pipeline, activité récente, échéances de la semaine, motifs récurrents.
 - **Journal d'audit** — qui a créé, modifié (valeur avant → après) ou supprimé chaque fiche/tâche/ticket/campagne, avec auteur et date ; visible par fiche (onglet « Journal ») et dans le flux d'activité global du tableau de bord.
-- **Rôles & équipe** — chaque personne choisit son rôle (Commercial, Service client, Marketing, Direction, Administrateur) depuis son profil. Page « Équipe » réservée aux éditeurs de l'artefact pour gérer les rôles de l'équipe — c'est la seule restriction réellement appliquée côté stockage (via les règles d'accès de la base de l'artefact) ; le reste de la différenciation par rôle est à but d'affichage uniquement.
+- **Rôles et accès** — le rôle est **attribué par un administrateur** (page « Équipe ») et détermine les modules visibles et le tableau de bord :
+  - *Commercial* : tableau de bord de son portefeuille (mes leads, mon pipeline, mes tâches, mes leads sans suivi), Leads, Pipeline, Clients, Activités, Base de connaissances ;
+  - *Service client* : tableau de bord tickets / SLA / satisfaction, Clients, Activités, Tickets, Base de connaissances ;
+  - *Marketing* : tableau de bord sources / campagnes / consentements, Leads, Campagnes, Base de connaissances, Rapports ;
+  - *Direction* et *Administrateur* : tous les modules et la vue d'ensemble.
+  L'attribution des rôles est vérifiée par le stockage (personne ne peut se donner un rôle lui-même). Les restrictions de modules sont appliquées par l'application ; un cloisonnement des données par rôle côté serveur reste à faire.
+- **Import de leads (CSV)** — import d'un fichier Excel enregistré en CSV, avec aperçu, reconnaissance automatique des colonnes (Nom ou Prénom + Nom, E-mail, Téléphone, Société, Source, Notes), détection des doublons et modèle téléchargeable.
+- **Doublons** — alerte à la création d'une fiche et badge « Doublon ? » (même e-mail, même téléphone ou même nom + société).
+- **Consentements** — e-mail / SMS / WhatsApp par fiche, avec date et origine ; les campagnes e-mail / SMS / WhatsApp ne ciblent que les contacts ayant consenti.
+- **Leads sans suivi** — un lead sans propriétaire, ou sans échange ni tâche depuis plus de 48 h, est signalé (filtre dédié, alerte sur le tableau de bord).
 - **Service client enrichi** — base de connaissances (FAQ), escalade d'un ticket (passe en urgence + crée une tâche de suivi automatique), note de satisfaction (CSAT) à la clôture.
 - **Campagnes marketing (simulées)** — création d'une campagne ciblée (étape/source), lancement générant des statistiques d'envoi/ouverture/clic/conversion simulées pour la démonstration (aucun message n'est réellement envoyé).
 - **Rapports** — filtres par période et par propriétaire, délai moyen de résolution des tickets, CSAT moyen, prévisions par propriétaire, et export CSV des fiches.

@@ -90,18 +90,22 @@ drop policy if exists "lecture équipe" on public.records;
 create policy "lecture équipe" on public.records
   for select to authenticated using (true);
 
--- Création : tout membre connecté ; pour « team », seulement sa propre ligne (ou admin)
+-- Création : tout membre connecté ; les rôles (« team ») sont attribués par un admin uniquement ;
+-- « members » : chacun ne crée que sa propre ligne de présence
 drop policy if exists "création" on public.records;
 create policy "création" on public.records
   for insert to authenticated with check (
-    collection <> 'team' or id = auth.uid()::text or public.is_admin()
+    (collection <> 'team' or public.is_admin())
+    and (collection <> 'members' or id = auth.uid()::text or public.is_admin())
   );
 
 -- Modification : jamais sur le journal d'audit (traces non modifiables)
 drop policy if exists "modification" on public.records;
 create policy "modification" on public.records
   for update to authenticated using (
-    collection <> 'audit' and (collection <> 'team' or id = auth.uid()::text or public.is_admin())
+    collection <> 'audit'
+    and (collection <> 'team' or public.is_admin())
+    and (collection <> 'members' or id = auth.uid()::text or public.is_admin())
   );
 
 -- Suppression : jamais sur le journal d'audit ; « team » réservé aux admins
@@ -110,6 +114,22 @@ create policy "suppression" on public.records
   for delete to authenticated using (
     collection <> 'audit' and (collection <> 'team' or public.is_admin())
   );
+
+-- Le rôle « Administrateur » attribué dans le CRM donne aussi le droit d'administrer (is_admin)
+create or replace function public.sync_admin_from_role() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if new.collection = 'team' then
+    update public.profiles
+       set is_admin = (new.data->>'role' = 'admin')
+     where id::text = new.id
+       and is_admin is distinct from (new.data->>'role' = 'admin');
+  end if;
+  return new;
+end $$;
+drop trigger if exists records_sync_admin on public.records;
+create trigger records_sync_admin after insert or update on public.records
+  for each row execute function public.sync_admin_from_role();
 
 -- 5. Temps réel : diffuser les changements à tous les navigateurs connectés
 do $$ begin
