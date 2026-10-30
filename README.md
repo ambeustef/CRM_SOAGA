@@ -33,6 +33,7 @@ Le cahier de besoins couvre un périmètre très large (leads, pipeline, marketi
 
 - `landing.html` — page vitrine publique (façon zoho.com/soaga.net) : présentation du produit, captures d'écran réelles, bouton « Se connecter » vers l'application. C'est la page qu'on verrait avant de se connecter.
 - `index.html` — l'application CRM elle-même (HTML/CSS/JS, un seul fichier, sans dépendance de build). C'est la page « après connexion ».
+- `fonds.json` — valeurs liquidatives des fonds SOAGA affichées dans la bande déroulante de la vitrine (nom, catégorie, variation, YTD, VL, date). Pour mettre à jour : modifier ce fichier et l'envoyer sur GitHub.
 - `config.js` — adresse et clé publique du projet Supabase (à renseigner).
 - `supabase-adapter.js` — connecteur Supabase : connexion, base de données, temps réel.
 - `supabase-schema.sql` — tables et règles d'accès à exécuter une fois dans Supabase.

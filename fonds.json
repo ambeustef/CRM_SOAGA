@@ -1,0 +1,16 @@
+{
+  "source": "soaga.net/fr — Nos solutions d'investissement",
+  "date": "2026-10-28",
+  "fonds": [
+    {"nom": "FCP SOAGA Épargne Actions",      "categorie": "Actions",      "variation": -1.69, "ytd": 41.36,  "vl": 16685.88},
+    {"nom": "FCP SOAGA Épargne Active",       "categorie": "Diversifiés",  "variation": -0.71, "ytd": 18.8,   "vl": 17356.73},
+    {"nom": "FCP SOAGA Épargne Dynamique",    "categorie": "Actions",      "variation": -1.76, "ytd": 38.41,  "vl": 10504.11},
+    {"nom": "FCP SOAGA Épargne Obligations",  "categorie": "Obligataires", "variation": 0.71,  "ytd": 4.88,   "vl": 6898.31},
+    {"nom": "FCP SOAGA Épargne Quiétude",     "categorie": "Obligataires", "variation": 0.45,  "ytd": 4.78,   "vl": 6629.45},
+    {"nom": "FCP SOAGA Épargne Sérénité",     "categorie": "Obligataires", "variation": 0.51,  "ytd": 6.03,   "vl": 18049.34},
+    {"nom": "FCP SOAGA Épargne Souveraine",   "categorie": "Obligataires", "variation": 0.02,  "ytd": 2.79,   "vl": 10274.78},
+    {"nom": "FCP SOAGA Patrimoine",           "categorie": "Diversifiés",  "variation": -0.23, "ytd": 4.46,   "vl": 10442.08},
+    {"nom": "FCP SOAGA Trésorerie",           "categorie": "Monétaire",    "variation": 0.36,  "ytd": 4.31,   "vl": 10853.18},
+    {"nom": "SICAV Abdou Diouf",              "categorie": "Diversifiés",  "variation": -0.93, "ytd": -88.92, "vl": 1849781.07}
+  ]
+}

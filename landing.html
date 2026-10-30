@@ -333,6 +333,28 @@ main{overflow-x:clip}
   .marquee .track{transform:none}
 }
 
+/* ---------- bande déroulante des fonds (VL) ---------- */
+.fund-ticker{position:relative;display:flex;align-items:stretch;background:#111A31;color:#F3F1EA;border-bottom:1px solid #1C2A4A;font:500 13px/1 var(--body);overflow:hidden}
+.ft-label{position:relative;z-index:2;flex:none;display:flex;align-items:center;gap:8px;padding:0 16px 0 max(16px,env(safe-area-inset-left,0px));background:#990000;color:#fff;font:700 12px var(--display);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.ft-label::after{content:"";position:absolute;top:0;bottom:0;right:-28px;width:28px;background:linear-gradient(90deg,#111A31,transparent)}
+.ft-label .dot{width:7px;height:7px;border-radius:99px;background:#6EE7A8;animation:ftPulse 1.8s ease-out infinite}
+.ft-label b{font-weight:900}
+.ft-viewport{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent)}
+.ft-track{display:flex;width:max-content;animation:ftScroll var(--ft-dur,60s) linear infinite}
+.fund-ticker:hover .ft-track,.fund-ticker:focus-within .ft-track{animation-play-state:paused}
+.ft-item{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;text-decoration:none;color:inherit;white-space:nowrap;border-right:1px solid rgba(255,255,255,.08)}
+.ft-item:hover{background:rgba(255,255,255,.05)}
+.ft-name{font:700 13px var(--display);letter-spacing:.01em}
+.ft-cat{font-size:10.5px;color:#AEB4C6;border:1px solid rgba(174,180,198,.35);border-radius:99px;padding:3px 7px}
+.ft-vl{font:600 13px "Roboto Mono",ui-monospace,monospace}
+.ft-var,.ft-ytd{font:600 12px "Roboto Mono",ui-monospace,monospace}
+.ft-up{color:#6EE7A8}.ft-dn{color:#FF9C95}
+.ft-ytd span{color:#AEB4C6;font-family:var(--body);font-weight:500;margin-right:4px}
+@keyframes ftScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ftPulse{0%{box-shadow:0 0 0 0 rgba(110,231,168,.6)}100%{box-shadow:0 0 0 8px transparent}}
+@media (max-width:640px){ .ft-label .txt{display:none} .ft-item{padding:11px 16px} }
+@media (prefers-reduced-motion: reduce){ .ft-track{animation:none} .ft-viewport{overflow-x:auto} }
+
 [hidden]{display:none!important}
 </style>
 
@@ -352,6 +374,11 @@ main{overflow-x:clip}
     <button type="button" class="btn btn-accent" data-open-login>Se connecter</button>
   </div>
 </header>
+
+<div class="fund-ticker" role="region" aria-label="Valeurs liquidatives des fonds SOAGA">
+  <div class="ft-label"><span class="dot"></span><span class="txt">Nos fonds · VL au</span> <b id="ft-date">28/10/2026</b></div>
+  <div class="ft-viewport"><div class="ft-track" id="ft-track"></div></div>
+</div>
 
 <main id="top">
 
@@ -646,6 +673,35 @@ main{overflow-x:clip}
     </div>
   </div>
 </footer>
+
+<script>
+// Bande des fonds : données de fonds.json (mises à jour sans toucher à la page), avec une copie de secours intégrée
+(function(){
+  "use strict";
+  var FALLBACK={"source": "soaga.net/fr — Nos solutions d'investissement", "date": "2026-10-28", "fonds": [{"nom": "FCP SOAGA Épargne Actions", "categorie": "Actions", "variation": -1.69, "ytd": 41.36, "vl": 16685.88}, {"nom": "FCP SOAGA Épargne Active", "categorie": "Diversifiés", "variation": -0.71, "ytd": 18.8, "vl": 17356.73}, {"nom": "FCP SOAGA Épargne Dynamique", "categorie": "Actions", "variation": -1.76, "ytd": 38.41, "vl": 10504.11}, {"nom": "FCP SOAGA Épargne Obligations", "categorie": "Obligataires", "variation": 0.71, "ytd": 4.88, "vl": 6898.31}, {"nom": "FCP SOAGA Épargne Quiétude", "categorie": "Obligataires", "variation": 0.45, "ytd": 4.78, "vl": 6629.45}, {"nom": "FCP SOAGA Épargne Sérénité", "categorie": "Obligataires", "variation": 0.51, "ytd": 6.03, "vl": 18049.34}, {"nom": "FCP SOAGA Épargne Souveraine", "categorie": "Obligataires", "variation": 0.02, "ytd": 2.79, "vl": 10274.78}, {"nom": "FCP SOAGA Patrimoine", "categorie": "Diversifiés", "variation": -0.23, "ytd": 4.46, "vl": 10442.08}, {"nom": "FCP SOAGA Trésorerie", "categorie": "Monétaire", "variation": 0.36, "ytd": 4.31, "vl": 10853.18}, {"nom": "SICAV Abdou Diouf", "categorie": "Diversifiés", "variation": -0.93, "ytd": -88.92, "vl": 1849781.07}]};
+  var track=document.getElementById('ft-track'), dateEl=document.getElementById('ft-date');
+  function nf(n,dec){ return Number(n).toLocaleString('fr-FR',{minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+  function pct(v){ return (v>0?'+':v<0?'−':'')+nf(Math.abs(v),2)+' %'; }
+  function esc(t){ var d=document.createElement('div'); d.textContent=String(t==null?'':t); return d.innerHTML; }
+  function item(f){
+    var dir=f.variation>0?'ft-up':f.variation<0?'ft-dn':'';
+    return '<a class="ft-item" href="https://soaga.net/fr/" target="_blank" rel="noopener">'+
+      '<span class="ft-name">'+esc(f.nom)+'</span><span class="ft-cat">'+esc(f.categorie)+'</span>'+
+      '<span class="ft-vl">VL '+nf(f.vl,2)+' F CFA</span>'+
+      '<span class="ft-var '+dir+'">'+(f.variation>0?'▲':f.variation<0?'▼':'■')+' '+pct(f.variation)+'</span>'+
+      '<span class="ft-ytd '+(f.ytd>=0?'ft-up':'ft-dn')+'"><span>YTD</span>'+pct(f.ytd)+'</span></a>';
+  }
+  function render(d){
+    if(!d || !d.fonds || !d.fonds.length) return;
+    var html=d.fonds.map(item).join('');
+    track.innerHTML=html+html.replace(/<a class="ft-item"/g,'<a class="ft-item" aria-hidden="true" tabindex="-1"');
+    if(d.date){ var p=d.date.split('-'); if(p.length===3) dateEl.textContent=p[2]+'/'+p[1]+'/'+p[0]; }
+    requestAnimationFrame(function(){ track.style.setProperty('--ft-dur', Math.max(30, Math.round(track.scrollWidth/2/45))+'s'); });
+  }
+  render(FALLBACK);
+  if(window.fetch) fetch('fonds.json',{cache:'no-cache'}).then(function(r){ return r.ok?r.json():null; }).then(render).catch(function(){});
+})();
+</script>
 
 <script>
 (function(){
